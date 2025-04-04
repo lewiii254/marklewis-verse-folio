@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SectionHeading from '@/components/SectionHeading';
@@ -8,7 +7,7 @@ import TestimonialCard from '@/components/TestimonialCard';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone, GraduationCap, Award, Medal, Certificate } from 'lucide-react';
+import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone, GraduationCap, Award, Medal, Clipboard } from 'lucide-react';
 import CertificateCard from '@/components/CertificateCard';
 
 const Index = () => {
@@ -258,7 +257,7 @@ const Index = () => {
                   title="Google UX Design Professional Certificate"
                   issuer="Google"
                   date="2023"
-                  icon={<Certificate />}
+                  icon={<Clipboard />}
                 />
                 
                 <CertificateCard 
@@ -279,7 +278,7 @@ const Index = () => {
                   title="Advanced JavaScript Certification"
                   issuer="freeCodeCamp"
                   date="2021"
-                  icon={<Certificate />}
+                  icon={<Clipboard />}
                 />
                 
                 <CertificateCard 
