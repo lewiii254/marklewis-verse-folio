@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SectionHeading from '@/components/SectionHeading';
@@ -8,7 +7,7 @@ import TestimonialCard from '@/components/TestimonialCard';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, MessageSquare, Smartphone } from 'lucide-react';
+import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone } from 'lucide-react';
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
