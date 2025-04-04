@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SectionHeading from '@/components/SectionHeading';
@@ -7,7 +8,8 @@ import TestimonialCard from '@/components/TestimonialCard';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone } from 'lucide-react';
+import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone, GraduationCap, Award, Medal, Certificate } from 'lucide-react';
+import CertificateCard from '@/components/CertificateCard';
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -36,26 +38,26 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
               <div className="md:col-span-7 space-y-6">
                 <div className="inline-block glass px-4 py-2 rounded-full mb-2 text-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <span className="text-primary">✦</span> UI/UX Designer & Software Developer
+                  <span className="text-primary">✦</span> UI/UX Designer & Software Developer <span className="ml-1">🚀</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  Hi, I'm <span className="text-gradient">Marklewis Mutugi</span>
+                  Hi, I'm <span className="text-gradient">Marklewis Mutugi</span> <span className="inline-block animate-bounce">👋</span>
                 </h1>
                 
                 <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                  I craft intuitive digital experiences that bridge the gap between user needs and business goals. With expertise in UI/UX design and software development, I bring ideas to life with code.
+                  I craft intuitive digital experiences that bridge the gap between user needs and business goals. With expertise in UI/UX design and software development, I bring ideas to life with code. <span className="text-primary">✨</span>
                 </p>
                 
                 <div className="pt-2 flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
                   <Button size="lg" asChild>
                     <a href="#contact">
-                      Get in touch
+                      Get in touch <span className="ml-1">📩</span>
                     </a>
                   </Button>
                   <Button variant="outline" size="lg" asChild>
                     <a href="#projects">
-                      View my work
+                      View my work <span className="ml-1">👀</span>
                     </a>
                   </Button>
                 </div>
@@ -82,7 +84,7 @@ const Index = () => {
           <div className="container">
             <SectionHeading 
               title="About Me"
-              subtitle="Learn more about my journey, my passion, and what drives me to create outstanding digital experiences."
+              subtitle="Learn more about my journey, my passion, and what drives me to create outstanding digital experiences. 💪"
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -95,15 +97,15 @@ const Index = () => {
               </div>
               
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold">My Journey</h3>
+                <h3 className="text-2xl font-bold">My Journey <span className="ml-1">🧭</span></h3>
                 <p className="text-muted-foreground">
                   I'm a versatile UI/UX designer and software developer with a passion for creating digital experiences that are both beautiful and functional. With a background in computer science and years of experience in the industry, I've developed a holistic approach to product development.
                 </p>
                 <p className="text-muted-foreground">
-                  My expertise spans the entire product lifecycle, from user research and wireframing to front-end and back-end development. I believe in user-centered design principles and writing clean, maintainable code.
+                  My expertise spans the entire product lifecycle, from user research and wireframing to front-end and back-end development. I believe in user-centered design principles and writing clean, maintainable code. <span className="text-primary">{"</>"}</span>
                 </p>
                 <p className="text-muted-foreground">
-                  When I'm not coding or designing, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.
+                  When I'm not coding or designing, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers. 🤓
                 </p>
                 
                 <div className="pt-4">
@@ -124,7 +126,7 @@ const Index = () => {
           <div className="container">
             <SectionHeading 
               title="Skills & Expertise"
-              subtitle="Here are the technologies and tools I use to bring ideas to life."
+              subtitle="Here are the technologies and tools I use to bring ideas to life. 🛠️"
             />
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -140,7 +142,7 @@ const Index = () => {
             
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-xl font-bold mb-4">Design Tools</h3>
+                <h3 className="text-xl font-bold mb-4">Design Tools <span className="ml-1">🎨</span></h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span>Figma</span>
@@ -170,7 +172,7 @@ const Index = () => {
               </div>
               
               <div>
-                <h3 className="text-xl font-bold mb-4">Development Skills</h3>
+                <h3 className="text-xl font-bold mb-4">Development Skills <span className="ml-1">💻</span></h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span>React / React Native</span>
@@ -201,13 +203,109 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Education & Certifications Section */}
+        <section id="education" className="py-20 bg-secondary/50">
+          <div className="container">
+            <SectionHeading 
+              title="Education & Certifications"
+              subtitle="My academic journey and professional qualifications that validate my expertise. 🎓"
+            />
+            
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold mb-6 flex items-center">
+                <GraduationCap className="mr-2 text-primary" />
+                Education
+              </h3>
+              
+              <div className="space-y-8">
+                <div className="glass p-6 rounded-xl hover-lift">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                    <div>
+                      <h4 className="text-xl font-bold">Bachelor of Science in Computer Science</h4>
+                      <p className="text-lg text-primary">University of Nairobi</p>
+                      <p className="mt-2 text-muted-foreground">Studied algorithms, data structures, software engineering principles, and computer networks. Graduated with honors.</p>
+                    </div>
+                    <div className="text-right md:whitespace-nowrap">
+                      <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2018 - 2022</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="glass p-6 rounded-xl hover-lift">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                    <div>
+                      <h4 className="text-xl font-bold">High School Diploma</h4>
+                      <p className="text-lg text-primary">Nairobi Secondary School</p>
+                      <p className="mt-2 text-muted-foreground">Focused on Mathematics, Physics, and Computer Studies. Participated in national coding competitions.</p>
+                    </div>
+                    <div className="text-right md:whitespace-nowrap">
+                      <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2014 - 2018</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl font-bold mb-6 flex items-center">
+                <Award className="mr-2 text-primary" />
+                Certifications
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <CertificateCard 
+                  title="Google UX Design Professional Certificate"
+                  issuer="Google"
+                  date="2023"
+                  icon={<Certificate />}
+                />
+                
+                <CertificateCard 
+                  title="AWS Certified Developer"
+                  issuer="Amazon Web Services"
+                  date="2022"
+                  icon={<Award />}
+                />
+                
+                <CertificateCard 
+                  title="React Native Specialist"
+                  issuer="Meta (Facebook)"
+                  date="2022"
+                  icon={<Medal />}
+                />
+                
+                <CertificateCard 
+                  title="Advanced JavaScript Certification"
+                  issuer="freeCodeCamp"
+                  date="2021"
+                  icon={<Certificate />}
+                />
+                
+                <CertificateCard 
+                  title="UI/UX Design Mastery"
+                  issuer="Interaction Design Foundation"
+                  date="2021"
+                  icon={<Award />}
+                />
+                
+                <CertificateCard 
+                  title="Python for Data Science"
+                  issuer="IBM"
+                  date="2020"
+                  icon={<Medal />}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
         
         {/* Projects Section */}
-        <section id="projects" className="py-20 bg-secondary/50">
+        <section id="projects" className="py-20">
           <div className="container">
             <SectionHeading 
               title="Featured Projects"
-              subtitle="Check out some of my recent work and the problems I've solved."
+              subtitle="Check out some of my recent work and the problems I've solved. 🚀"
             />
             
             <div className="space-y-20">
@@ -243,7 +341,7 @@ const Index = () => {
             <div className="mt-12 text-center">
               <Button variant="outline" asChild>
                 <a href="#" target="_blank" rel="noopener noreferrer">
-                  View All Projects
+                  View All Projects <span className="ml-1">🔍</span>
                 </a>
               </Button>
             </div>
@@ -251,11 +349,11 @@ const Index = () => {
         </section>
         
         {/* Testimonials Section */}
-        <section id="testimonials" className="py-20">
+        <section id="testimonials" className="py-20 bg-secondary/50">
           <div className="container">
             <SectionHeading 
               title="Client Testimonials"
-              subtitle="What people are saying about working with me."
+              subtitle="What people are saying about working with me. 💬"
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -281,16 +379,16 @@ const Index = () => {
         </section>
         
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-secondary/50">
+        <section id="contact" className="py-20">
           <div className="container">
             <SectionHeading 
               title="Get In Touch"
-              subtitle="Have a project in mind or want to chat? Feel free to reach out!"
+              subtitle="Have a project in mind or want to chat? Feel free to reach out! 📬"
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-bold mb-4">Let's Connect</h3>
+                <h3 className="text-2xl font-bold mb-4">Let's Connect <span className="ml-1">🤝</span></h3>
                 <p className="text-muted-foreground mb-6">
                   I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision. Feel free to contact me using the form or the contact information.
                 </p>
@@ -315,7 +413,7 @@ const Index = () => {
                     <div>
                       <p className="font-medium">Location</p>
                       <p className="text-sm text-muted-foreground">
-                        Nairobi, Kenya
+                        Nairobi, Kenya <span className="ml-1">📍</span>
                       </p>
                     </div>
                   </div>
