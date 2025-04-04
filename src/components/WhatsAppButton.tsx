@@ -71,7 +71,7 @@ const WhatsAppButton = ({
         <button
           onClick={handleClick}
           className={cn(
-            "p-3.5 rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 flex items-center justify-center",
+            "p-3.5 rounded-full bg-[#25D366] text-black shadow-lg transition-all duration-300 flex items-center justify-center",
             "hover:scale-110 animate-bounce-slow",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
           )}
