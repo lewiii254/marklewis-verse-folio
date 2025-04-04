@@ -482,8 +482,12 @@ const Index = () => {
         <ChevronUp size={20} />
       </button>
       
-      {/* WhatsApp Button - Replace with your actual phone number */}
-      <WhatsAppButton phoneNumber="254700000000" />
+      {/* WhatsApp Button with updated props */}
+      <WhatsAppButton 
+        phoneNumber="254700000000" 
+        message="Hi Marklewis! I saw your amazing portfolio and I'm interested in working together on a project. When would be a good time to chat?"
+        testimonialCount={testimonials.length * 5}
+      />
     </div>
   );
 };
