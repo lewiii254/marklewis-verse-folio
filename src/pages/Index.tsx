@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SectionHeading from '@/components/SectionHeading';
@@ -9,6 +10,13 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone, GraduationCap, Award, Medal, Clipboard } from 'lucide-react';
 import CertificateCard from '@/components/CertificateCard';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from '@/components/ui/carousel';
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -25,6 +33,35 @@ const Index = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Sample testimonials data
+  const testimonials = [
+    {
+      content: "Working with Marklewis was a game-changer for our startup. His technical skills combined with his eye for design helped us create a product that our users love. Can't recommend him enough! 🚀",
+      author: "Sarah Johnson",
+      role: "CEO, TechStart"
+    },
+    {
+      content: "Marklewis has a rare ability to translate complex technical requirements into beautiful, intuitive interfaces. He's a true professional who delivers exceptional results. A joy to work with! ✨",
+      author: "David Chen",
+      role: "Product Manager, InnovateCorp"
+    },
+    {
+      content: "I've worked with many developers over the years, but few have impressed me as much as Marklewis. His attention to detail and commitment to quality are unmatched. Absolutely incredible! 💯",
+      author: "Michelle Rodriguez",
+      role: "Design Director, CreativeWorks"
+    },
+    {
+      content: "Marklewis exceeded all our expectations with his creative approach to problem-solving. He not only delivered what we asked for but improved upon our initial ideas. Simply brilliant! 👏",
+      author: "Alex Thompson",
+      role: "CTO, FutureTech"
+    },
+    {
+      content: "Working with Marklewis felt like having a teammate who was just as invested in our success as we were. His communication skills and technical expertise made our project a huge success! 🏆",
+      author: "Jessica Lee",
+      role: "Founder, StartupLaunch"
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -352,27 +389,35 @@ const Index = () => {
           <div className="container">
             <SectionHeading 
               title="Client Testimonials"
-              subtitle="What people are saying about working with me. 💬"
+              subtitle="What people are saying about working with me. Check out these amazing feedback! 💬"
             />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <TestimonialCard 
-                content="Working with Marklewis was a game-changer for our startup. His technical skills combined with his eye for design helped us create a product that our users love."
-                author="Sarah Johnson"
-                role="CEO, TechStart"
-              />
-              
-              <TestimonialCard 
-                content="Marklewis has a rare ability to translate complex technical requirements into beautiful, intuitive interfaces. He's a true professional who delivers exceptional results."
-                author="David Chen"
-                role="Product Manager, InnovateCorp"
-              />
-              
-              <TestimonialCard 
-                content="I've worked with many developers over the years, but few have impressed me as much as Marklewis. His attention to detail and commitment to quality are unmatched."
-                author="Michelle Rodriguez"
-                role="Design Director, CreativeWorks"
-              />
+            <div className="mx-auto max-w-5xl px-8">
+              <Carousel 
+                className="w-full" 
+                opts={{
+                  align: "center",
+                  loop: true
+                }}
+              >
+                <CarouselContent>
+                  {testimonials.map((testimonial, index) => (
+                    <CarouselItem key={index} className="md:basis-4/5 lg:basis-3/4 pl-6">
+                      <div className="p-1">
+                        <TestimonialCard 
+                          content={testimonial.content}
+                          author={testimonial.author}
+                          role={testimonial.role}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center gap-2 mt-4">
+                  <CarouselPrevious className="static" />
+                  <CarouselNext className="static" />
+                </div>
+              </Carousel>
             </div>
           </div>
         </section>
