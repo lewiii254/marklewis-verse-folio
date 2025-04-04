@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SectionHeading from '@/components/SectionHeading';
@@ -7,6 +6,7 @@ import SkillCard from '@/components/SkillCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { Button } from '@/components/ui/button';
 import { ChevronUp, Code, Database, Download, Globe, Layout, Lightbulb, Mail, MessageSquare, Smartphone, GraduationCap, Award, Medal, Clipboard } from 'lucide-react';
 import CertificateCard from '@/components/CertificateCard';
@@ -34,7 +34,6 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Sample testimonials data
   const testimonials = [
     {
       content: "Working with Marklewis was a game-changer for our startup. His technical skills combined with his eye for design helped us create a product that our users love. Can't recommend him enough! 🚀",
@@ -482,6 +481,9 @@ const Index = () => {
       >
         <ChevronUp size={20} />
       </button>
+      
+      {/* WhatsApp Button - Replace with your actual phone number */}
+      <WhatsAppButton phoneNumber="254700000000" />
     </div>
   );
 };
