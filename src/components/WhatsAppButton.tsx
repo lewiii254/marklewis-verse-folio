@@ -55,7 +55,7 @@ const WhatsAppButton = ({
           showBubble ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-20px] pointer-events-none"
         )}
       >
-        <p>Chat directly with me on WhatsApp! <span className="text-[#25D366]">✓</span></p>
+        <p>Chat directly with me on WhatsApp! <span className="text-[blue]">✓</span></p>
         <div className="absolute bottom-3 right-[-8px] w-4 h-4 bg-white transform rotate-45"></div>
       </div>
       
