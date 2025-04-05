@@ -51,18 +51,18 @@ const WhatsAppButton = ({
       {/* Text bubble */}
       <div 
         className={cn(
-          "max-w-[200px] bg-white p-3 rounded-xl shadow-md text-sm transition-all duration-300 relative",
+          "max-w-[200px] bg-white dark:bg-gray-800 p-3 rounded-xl shadow-md text-sm transition-all duration-300 relative",
           showBubble ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-20px] pointer-events-none"
         )}
       >
-        <p>Chat directly with me on WhatsApp! <span className="text-[blue]">✓</span></p>
-        <div className="absolute bottom-3 right-[-8px] w-4 h-4 bg-white transform rotate-45"></div>
+        <p className="dark:text-white">Chat directly with me on WhatsApp! <span className="text-[blue] dark:text-[lightblue]">✓</span></p>
+        <div className="absolute bottom-3 right-[-8px] w-4 h-4 bg-white dark:bg-gray-800 transform rotate-45"></div>
       </div>
       
       <div className="relative">
-        {/* Badge showing testimonial count */}
+        {/* Badge showing testimonial count - repositioned to the left side */}
         <Badge 
-          className="absolute -top-2 -right-2 z-10 bg-primary hover:bg-primary/90 animate-pulse"
+          className="absolute -top-2 -left-2 z-10 bg-primary hover:bg-primary/90 animate-pulse"
           variant="default"
         >
           {testimonialCount}+ Clients
