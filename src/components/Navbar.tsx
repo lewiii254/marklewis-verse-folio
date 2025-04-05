@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -21,11 +22,12 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -37,24 +39,33 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between">
-        <a 
-          href="#home" 
+        <Link 
+          to="/" 
           className="font-heading text-xl font-bold flex items-center gap-1"
         >
           <span className="text-gradient">Mark.Lewis</span>
-        </a>
+        </Link>
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a 
-                  href={link.href} 
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                >
-                  {link.name}
-                </a>
+                {link.href.startsWith('/') ? (
+                  <Link 
+                    to={link.href} 
+                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a 
+                    href={link.href} 
+                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  >
+                    {link.name}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -86,13 +97,23 @@ const Navbar = () => {
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a 
-                  href={link.href} 
-                  className="block py-2 text-foreground/80 hover:text-foreground hover:pl-2 transition-all" 
-                  onClick={closeMenu}
-                >
-                  {link.name}
-                </a>
+                {link.href.startsWith('/') ? (
+                  <Link 
+                    to={link.href} 
+                    className="block py-2 text-foreground/80 hover:text-foreground hover:pl-2 transition-all" 
+                    onClick={closeMenu}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a 
+                    href={link.href} 
+                    className="block py-2 text-foreground/80 hover:text-foreground hover:pl-2 transition-all" 
+                    onClick={closeMenu}
+                  >
+                    {link.name}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
