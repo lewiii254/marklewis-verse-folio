@@ -60,9 +60,9 @@ const WhatsAppButton = ({
       </div>
       
       <div className="relative">
-        {/* Badge showing testimonial count - repositioned to the left side */}
+        {/* Badge showing testimonial count - repositioned to the left side with more offset to prevent overlap */}
         <Badge 
-          className="absolute -top-2 -left-2 z-10 bg-primary hover:bg-primary/90 animate-pulse"
+          className="absolute -top-3 -left-3 z-10 bg-primary hover:bg-primary/90 animate-pulse"
           variant="default"
         >
           {testimonialCount}+ Clients
