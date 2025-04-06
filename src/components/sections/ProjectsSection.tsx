@@ -32,7 +32,7 @@ const ProjectsSection = () => {
               title="Tembea Afrika 🌍✈️"
               description="A modern tourism platform built with React, Node.js, and MongoDB. Features include destination search, category filtering, user authentication, itinerary planning, booking management, and M-Pesa payment integration."
               imageSrc="/Tourism.png"
-              tags={["React", "Firebase", "Redux", "Expo", "TypeScript"]}
+              tags={["React", "Firebase", "Redux", "Tailwind CSS", "TypeScript"]}
               liveDemoUrl="https://tembea-africa.vercel.app/"
               githubUrl="https://github.com/lewiii254/safaricom-hook-final-project-and-deployment-week-8-lewiii254.git"
               reversed
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
               title="🌱 AI-Powered Plant Health Assistant"
               description="An intelligent plant health assistant powered by AI for real-time crop diagnostics and care. Includes image-based disease detection, expert treatment recommendations, and interactive insights to help farmers make informed, data-driven decisions. 🌿📊"
               imageSrc="/Agri.png"
-              tags={["React", "D3.js", "Material UI", "Express", "PostgreSQL"]}
+              tags={["React", "Supabase", "Material UI", "AI & ML", "PostgreSQL"]}
               liveDemoUrl="https://preview--shamba-smart-scan.lovable.app/"
               githubUrl="https://preview--shamba-smart-scan.lovable.app/"
             />

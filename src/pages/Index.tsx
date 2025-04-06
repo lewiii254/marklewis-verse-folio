@@ -65,8 +65,8 @@ const Index = () => {
       
       {/* WhatsApp Button */}
       <WhatsAppButton 
-        phoneNumber="254700000000" 
-        message="Hi Marklewis! I saw your amazing portfolio and I'm interested in working together on a project. When would be a good time to chat?"
+        phoneNumber="254790767347" 
+        message="Hi Marklewis👋! I saw your amazing✨ portfolio and I'm interested in working together🤝 on a project. When would be a good time to chat?"
       />
     </div>
   );

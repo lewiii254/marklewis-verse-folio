@@ -14,27 +14,27 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       content: "Working with Marklewis was a game-changer for our startup. His technical skills combined with his eye for design helped us create a product that our users love. Can't recommend him enough! 🚀",
-      author: "Sarah Johnson",
+      author: "Sarah Kimani",
       role: "CEO, TechStart"
     },
     {
       content: "Marklewis has a rare ability to translate complex technical requirements into beautiful, intuitive interfaces. He's a true professional who delivers exceptional results. A joy to work with! ✨",
-      author: "David Chen",
+      author: "David Kaje",
       role: "Product Manager, InnovateCorp"
     },
     {
       content: "I've worked with many developers over the years, but few have impressed me as much as Marklewis. His attention to detail and commitment to quality are unmatched. Absolutely incredible! 💯",
-      author: "Michelle Rodriguez",
+      author: "Eric Muriithi",
       role: "Design Director, CreativeWorks"
     },
     {
       content: "Marklewis exceeded all our expectations with his creative approach to problem-solving. He not only delivered what we asked for but improved upon our initial ideas. Simply brilliant! 👏",
-      author: "Alex Thompson",
+      author: "Alex Njeru",
       role: "CTO, FutureTech"
     },
     {
       content: "Working with Marklewis felt like having a teammate who was just as invested in our success as we were. His communication skills and technical expertise made our project a huge success! 🏆",
-      author: "Jessica Lee",
+      author: "Wilson Muchangi",
       role: "Founder, StartupLaunch"
     }
   ];
