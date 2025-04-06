@@ -16,7 +16,7 @@ const blogPosts = [
     date: 'April 2, 2024',
     category: 'Design',
     readTime: '5 min read',
-    image: '/placeholder.svg'
+    image: '/uiux.jpeg'
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const blogPosts = [
     date: 'March 15, 2024',
     category: 'Development',
     readTime: '8 min read',
-    image: '/placeholder.svg'
+    image: '/react.jpeg'
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const blogPosts = [
     date: 'February 28, 2024',
     category: 'Design',
     readTime: '6 min read',
-    image: '/placeholder.svg'
+    image: '/DesignSystem.jpeg'
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const blogPosts = [
     date: 'February 10, 2024',
     category: 'Case Study',
     readTime: '10 min read',
-    image: '/placeholder.svg'
+    image: '/SDLC.jpeg'
   }
 ];
 
