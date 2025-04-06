@@ -12,21 +12,21 @@ const BlogSection = () => {
       excerpt: "Explore the latest design trends shaping the digital landscape this year...",
       date: "April 2, 2024",
       category: "Design",
-      image: "/placeholder.svg"
+      image: "/uiux.jpeg"
     },
     {
       title: "Building Performant React Applications",
       excerpt: "Learn how to optimize your React applications for better performance...",
       date: "March 15, 2024",
       category: "Development",
-      image: "/placeholder.svg"
+      image: "/react.jpeg"
     },
     {
       title: "The Power of Design Systems in Product Development",
       excerpt: "How design systems can streamline your workflow and improve consistency...",
       date: "February 28, 2024",
       category: "Design",
-      image: "/placeholder.svg"
+      image: "/DesignSystem.jpeg"
     }
   ];
 
@@ -35,7 +35,7 @@ const BlogSection = () => {
       <div className="container">
         <ScrollReveal>
           <SectionHeading 
-            title="From My Blog"
+            title="From My Blog🧾"
             subtitle="Check out my latest articles and thoughts on design, development, and technology. 📝"
           />
         </ScrollReveal>
@@ -58,7 +58,7 @@ const BlogSection = () => {
                   <p className="text-muted-foreground mb-4 flex-1">{post.excerpt}</p>
                   <div className="flex justify-end">
                     <Button variant="ghost" size="sm" className="hover:text-primary">
-                      Read More
+                      Read More🧾
                     </Button>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ const BlogSection = () => {
           <div className="mt-12 text-center">
             <Button className="gap-2" asChild>
               <Link to="/blog">
-                Visit My Blog
+                Visit My Blog🧾
                 <ArrowRight size={16} />
               </Link>
             </Button>
