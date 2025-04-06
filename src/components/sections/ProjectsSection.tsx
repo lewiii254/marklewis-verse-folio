@@ -10,7 +10,7 @@ const ProjectsSection = () => {
       <div className="container">
         <ScrollReveal>
           <SectionHeading 
-            title="Featured Projects"
+            title="Featured Projects😁"
             subtitle="Check out some of my recent work and the problems I've solved. 🚀"
           />
         </ScrollReveal>
@@ -18,35 +18,35 @@ const ProjectsSection = () => {
         <div className="space-y-20">
           <ScrollReveal>
             <ProjectCard 
-              title="E-commerce Platform"
-              description="A modern e-commerce platform built with React, Node.js, and MongoDB. Features include product search, filtering, user authentication, cart management, and payment integration."
-              imageSrc="/placeholder.svg"
+              title="Kazi-Haven Job Platform🧾"
+              description="A modern job portal platform built with React, Node.js, and MongoDB. Features include job search, filtering, user authentication, application tracking, employer dashboards, and M-Pesa payment integration."
+              imageSrc="/JobPortal.png"
               tags={["React", "Node.js", "MongoDB", "Express", "Redux"]}
-              liveDemoUrl="#"
-              githubUrl="#"
+              liveDemoUrl="https://kazi-haven.vercel.app/"
+              githubUrl="https://github.com/lewiii254/Kazi-Haven.git"
             />
           </ScrollReveal>
           
           <ScrollReveal>
             <ProjectCard 
-              title="Task Management App"
-              description="A productivity tool for managing tasks and projects. Built with React Native for cross-platform compatibility, with features like drag-and-drop, notifications, and real-time collaboration."
-              imageSrc="/placeholder.svg"
-              tags={["React Native", "Firebase", "Redux", "Expo", "TypeScript"]}
-              liveDemoUrl="#"
-              githubUrl="#"
+              title="Tembea Afrika 🌍✈️"
+              description="A modern tourism platform built with React, Node.js, and MongoDB. Features include destination search, category filtering, user authentication, itinerary planning, booking management, and M-Pesa payment integration."
+              imageSrc="/Tourism.png"
+              tags={["React", "Firebase", "Redux", "Expo", "TypeScript"]}
+              liveDemoUrl="https://tembea-africa.vercel.app/"
+              githubUrl="https://github.com/lewiii254/safaricom-hook-final-project-and-deployment-week-8-lewiii254.git"
               reversed
             />
           </ScrollReveal>
           
           <ScrollReveal>
             <ProjectCard 
-              title="Financial Dashboard"
-              description="A comprehensive dashboard for financial data visualization and analysis. Includes charts, graphs, and interactive reports to help users make data-driven decisions."
-              imageSrc="/placeholder.svg"
+              title="🌱 AI-Powered Plant Health Assistant"
+              description="An intelligent plant health assistant powered by AI for real-time crop diagnostics and care. Includes image-based disease detection, expert treatment recommendations, and interactive insights to help farmers make informed, data-driven decisions. 🌿📊"
+              imageSrc="/Agri.png"
               tags={["React", "D3.js", "Material UI", "Express", "PostgreSQL"]}
-              liveDemoUrl="#"
-              githubUrl="#"
+              liveDemoUrl="https://preview--shamba-smart-scan.lovable.app/"
+              githubUrl="https://preview--shamba-smart-scan.lovable.app/"
             />
           </ScrollReveal>
         </div>
@@ -54,8 +54,8 @@ const ProjectsSection = () => {
         <ScrollReveal delay={300}>
           <div className="mt-12 text-center">
             <Button variant="outline" asChild>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                View All Projects <span className="ml-1">🔍</span>
+              <a href="https://github.com/lewiii254?tab=repositories" target="_blank" rel="noopener noreferrer">
+                View All Projects🧾 <span className="ml-1">🔍</span>
               </a>
             </Button>
           </div>
