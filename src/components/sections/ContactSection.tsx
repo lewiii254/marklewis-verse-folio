@@ -31,7 +31,7 @@ const ContactSection = () => {
                   </div>
                   <div className="flex items-center">
                     <div>
-                      <p className="font-medium">Email</p>
+                      <p className="font-medium">Email📧</p>
                       <a 
                         href="mailto:ngondimarklewis@gmail.com" 
                         className="text-sm text-primary hover:underline"

@@ -6,12 +6,12 @@ import { Award, Clipboard, GraduationCap, Medal } from "lucide-react";
 
 const EducationSection = () => {
   const certificates = [
-    { title: "Google UX Design Professional Certificate", issuer: "Google", date: "2023", icon: <Clipboard /> },
-    { title: "AWS Certified Developer", issuer: "Amazon Web Services", date: "2022", icon: <Award /> },
-    { title: "React Native Specialist", issuer: "Meta (Facebook)", date: "2022", icon: <Medal /> },
-    { title: "Advanced JavaScript Certification", issuer: "freeCodeCamp", date: "2021", icon: <Clipboard /> },
-    { title: "UI/UX Design Mastery", issuer: "Interaction Design Foundation", date: "2021", icon: <Award /> },
-    { title: "Python for Data Science", issuer: "IBM", date: "2020", icon: <Medal /> }
+    { title: "Google UX Design Professional Certificate", issuer: "Google", date: "2025", icon: <Clipboard /> },
+    { title: "AWS Certified Developer", issuer: "Amazon Web Services", date: "2024", icon: <Award /> },
+    { title: "React Native Specialist", issuer: "Meta (Facebook)", date: "2025", icon: <Medal /> },
+    { title: "Advanced JavaScript Certification", issuer: "freeCodeCamp", date: "2025", icon: <Clipboard /> },
+    { title: "UI/UX Design Mastery", issuer: "Interaction Design Foundation", date: "2025", icon: <Award /> },
+    { title: "Python for Data Science", issuer: "IBM", date: "2024", icon: <Medal /> }
   ];
 
   return (
@@ -28,7 +28,7 @@ const EducationSection = () => {
           <ScrollReveal>
             <h3 className="text-2xl font-bold mb-6 flex items-center">
               <GraduationCap className="mr-2 text-primary" />
-              Education
+              Education🧾
             </h3>
           </ScrollReveal>
           
@@ -37,12 +37,12 @@ const EducationSection = () => {
               <div className="glass p-6 rounded-xl hover-lift">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
-                    <h4 className="text-xl font-bold">Bachelor of Science in Computer Science</h4>
+                    <h4 className="text-xl font-bold">Bachelor of Science in Computer Science💻</h4>
                     <p className="text-lg text-primary">Meru University of Science and Technology</p>
                     <p className="mt-2 text-muted-foreground">Currently pursuing a Bachelor’s degree in Computer Science. As a second-year student, I’m building a strong foundation in algorithms, data structures, software engineering, and computer networks.</p>
                   </div>
                   <div className="text-right md:whitespace-nowrap">
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2018 - 2022</span>
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2024 - 2028</span>
                   </div>
                 </div>
               </div>
@@ -52,12 +52,12 @@ const EducationSection = () => {
               <div className="glass p-6 rounded-xl hover-lift">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
-                    <h4 className="text-xl font-bold">High School</h4>
+                    <h4 className="text-xl font-bold">High School🏫</h4>
                     <p className="text-lg text-primary">Nyangwa Secondary School</p>
                     <p className="mt-2 text-muted-foreground">Focused on Mathematics, Physics, and Computer Studies. Participated in national coding competitions.</p>
                   </div>
                   <div className="text-right md:whitespace-nowrap">
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2014 - 2018</span>
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2020 - 2023</span>
                   </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@ const EducationSection = () => {
           <ScrollReveal>
             <h3 className="text-2xl font-bold mb-6 flex items-center">
               <Award className="mr-2 text-primary" />
-              Certifications
+              Certifications🧾
             </h3>
           </ScrollReveal>
           
