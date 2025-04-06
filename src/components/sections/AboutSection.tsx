@@ -17,11 +17,12 @@ const AboutSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <ScrollReveal direction="left">
-            <div className="glass rounded-xl overflow-hidden">
+            <div className="glass rounded-xl overflow-hidden shadow-lg">
               <img 
-                src="/placeholder.svg" 
-                alt="Marklewis Mutugi at work"
+                src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" 
+                alt="Developer coding on computer"
                 className="w-full h-auto"
+                loading="lazy"
               />
             </div>
           </ScrollReveal>
