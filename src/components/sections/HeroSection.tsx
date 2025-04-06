@@ -47,7 +47,7 @@ const HeroSection = () => {
               <div className="aspect-square rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <img 
-                  src="/myPic.jpg" 
+                  src="/Pic2.jpeg" 
                   alt="Marklewis Mutugi"
                   className="w-4/5 h-4/5 object-cover rounded-full border-4 border-background"
                 />
