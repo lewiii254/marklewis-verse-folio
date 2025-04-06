@@ -38,8 +38,8 @@ const EducationSection = () => {
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
                     <h4 className="text-xl font-bold">Bachelor of Science in Computer Science</h4>
-                    <p className="text-lg text-primary">University of Nairobi</p>
-                    <p className="mt-2 text-muted-foreground">Studied algorithms, data structures, software engineering principles, and computer networks. Graduated with honors.</p>
+                    <p className="text-lg text-primary">Meru University of Science and Technology</p>
+                    <p className="mt-2 text-muted-foreground">Currently pursuing a Bachelor’s degree in Computer Science. As a second-year student, I’m building a strong foundation in algorithms, data structures, software engineering, and computer networks.</p>
                   </div>
                   <div className="text-right md:whitespace-nowrap">
                     <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2018 - 2022</span>
@@ -52,8 +52,8 @@ const EducationSection = () => {
               <div className="glass p-6 rounded-xl hover-lift">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
-                    <h4 className="text-xl font-bold">High School Diploma</h4>
-                    <p className="text-lg text-primary">Nairobi Secondary School</p>
+                    <h4 className="text-xl font-bold">High School</h4>
+                    <p className="text-lg text-primary">Nyangwa Secondary School</p>
                     <p className="mt-2 text-muted-foreground">Focused on Mathematics, Physics, and Computer Studies. Participated in national coding competitions.</p>
                   </div>
                   <div className="text-right md:whitespace-nowrap">
