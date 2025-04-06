@@ -21,7 +21,7 @@ const ContactSection = () => {
             <div>
               <h3 className="text-2xl font-bold mb-4">Let's Connect <span className="ml-1">🤝</span></h3>
               <p className="text-muted-foreground mb-6">
-                I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision. Feel free to contact me using the form or the contact information.
+                I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision. Messages sent through this form will be delivered directly to my inbox. Feel free to contact me using the form or reach out directly via email.
               </p>
               
               <div className="space-y-4">
@@ -33,14 +33,14 @@ const ContactSection = () => {
                     <div>
                       <p className="font-medium">Email</p>
                       <a 
-                        href="mailto:marklewis@example.com" 
+                        href="mailto:ngondimarklewis@gmail.com" 
                         className="text-sm text-primary hover:underline"
-                        aria-label="Send email to marklewis@example.com"
+                        aria-label="Send email to ngondimarklewis@gmail.com"
                       >
-                        marklewis@example.com
+                        ngondimarklewis@gmail.com
                       </a>
                     </div>
-                    <CopyEmailButton email="marklewis@example.com" />
+                    <CopyEmailButton email="ngondimarklewis@gmail.com" />
                   </div>
                 </div>
                 

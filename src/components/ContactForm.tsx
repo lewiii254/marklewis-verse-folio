@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { Send } from 'lucide-react';
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/ngondimarklewis@gmail.com";
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -20,23 +22,42 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('Message sent successfully!', {
-        description: 'Thanks for reaching out. I\'ll get back to you shortly.'
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
       });
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+      
+      if (response.ok) {
+        toast.success('Message sent successfully!', {
+          description: 'Thanks for reaching out. I\'ll get back to you shortly.'
+        });
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        toast.error('Failed to send message', {
+          description: 'Please try again or contact me directly via email.'
+        });
+      }
+    } catch (error) {
+      toast.error('Something went wrong', {
+        description: 'Please try again or contact me directly via email.'
       });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
