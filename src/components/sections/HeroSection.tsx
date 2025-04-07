@@ -1,8 +1,32 @@
 
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      // Only update if we're on desktop, avoid on mobile
+      if (window.innerWidth > 768) {
+        const { clientX, clientY } = e;
+        const x = (clientX / window.innerWidth - 0.5) * 10; // -5 to 5
+        const y = (clientY / window.innerHeight - 0.5) * 10; // -5 to 5
+        setMousePosition({ x, y });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
     <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-32">
       <div className="container">
@@ -43,15 +67,63 @@ const HeroSection = () => {
           </div>
           
           <ScrollReveal delay={1000} direction="right" className="md:col-span-5">
-            <div className="relative">
-              <div className="aspect-square rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src="/Pic2.jpeg" 
-                  alt="Marklewis Mutugi"
-                  className="w-4/5 h-4/5 object-cover rounded-full border-4 border-background"
-                />
+            <div className="relative w-full max-w-[400px] mx-auto">
+              {/* Dynamic background with floating particles */}
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <div 
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 animate-pulse-slow"
+                  style={{
+                    transform: isMounted ? `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` : 'none'
+                  }}
+                ></div>
+                
+                {/* Floating particles */}
+                <div className="absolute h-4 w-4 rounded-full bg-primary/40 animate-float" 
+                  style={{ top: '20%', left: '10%', animationDelay: '0s' }}></div>
+                <div className="absolute h-3 w-3 rounded-full bg-primary/50 animate-float" 
+                  style={{ top: '70%', left: '15%', animationDelay: '1.5s' }}></div>
+                <div className="absolute h-5 w-5 rounded-full bg-accent/40 animate-float" 
+                  style={{ top: '30%', right: '10%', animationDelay: '1s' }}></div>
+                <div className="absolute h-3 w-3 rounded-full bg-accent/50 animate-float" 
+                  style={{ bottom: '20%', right: '15%', animationDelay: '2s' }}></div>
+                
+                {/* Light beam effect */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[150%] w-[10px] bg-gradient-to-t from-transparent via-primary/20 to-transparent animate-pulse-slow rotate-45"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[150%] w-[10px] bg-gradient-to-t from-transparent via-accent/20 to-transparent animate-pulse-slow -rotate-45"></div>
               </div>
+              
+              {/* Profile image with parallax effect */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div 
+                  className="w-4/5 h-4/5 relative"
+                  style={{
+                    transform: isMounted ? `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -0.8}px)` : 'none',
+                    transition: 'transform 0.1s ease-out'
+                  }}
+                >
+                  <img 
+                    src="/Pic2.jpeg" 
+                    alt="Marklewis Mutugi"
+                    className="w-full h-full object-cover rounded-full border-4 border-background shadow-2xl"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(var(--primary), 0.2))'
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Glowing border effect */}
+              <div className="absolute inset-0 rounded-full opacity-75"
+                style={{
+                  background: 'radial-gradient(circle at center, transparent 60%, rgba(var(--primary), 0.15) 100%)'
+                }}
+              ></div>
+              
+              {/* Ring rotation animation */}
+              <div className="absolute inset-[10%] border-2 border-dashed border-primary/20 rounded-full animate-[spin_40s_linear_infinite]"></div>
+              
+              {/* Outer glow */}
+              <div className="absolute inset-[-10%] blur-xl bg-gradient-to-br from-primary/5 to-accent/5 rounded-full"></div>
             </div>
           </ScrollReveal>
         </div>

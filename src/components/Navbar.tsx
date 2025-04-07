@@ -8,13 +8,36 @@ import ThemeSwitcher from "./ThemeSwitcher";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      
+      // Identify which section is currently in view
+      const sections = [
+        "home", "about", "career", "skills", 
+        "education", "projects", "blog", 
+        "testimonials", "contact"
+      ];
+      
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (!element) return false;
+        
+        const rect = element.getBoundingClientRect();
+        return rect.top <= 150 && rect.bottom >= 150;
+      });
+      
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
     
     window.addEventListener("scroll", handleScroll);
+    // Call once to set initial active section
+    handleScroll();
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -22,11 +45,14 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: "/#home" },
     { name: "About", href: "/#about" },
+    { name: "Career", href: "/#career" },
     { name: "Skills", href: "/#skills" },
+    { name: "Education", href: "/#education" },
     { name: "Projects", href: "/#projects" },
     { name: "Blog", href: "/blog" },
+    { name: "Testimonials", href: "/#testimonials" },
     { name: "Contact", href: "/#contact" },
   ];
 
@@ -49,25 +75,46 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                {link.href.startsWith('/') ? (
-                  <Link 
-                    to={link.href} 
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a 
-                    href={link.href} 
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                  >
-                    {link.name}
-                  </a>
-                )}
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = 
+                (link.href === "/#home" && activeSection === "home") ||
+                (link.href === "/#about" && activeSection === "about") ||
+                (link.href === "/#career" && activeSection === "career") ||
+                (link.href === "/#skills" && activeSection === "skills") ||
+                (link.href === "/#education" && activeSection === "education") ||
+                (link.href === "/#projects" && activeSection === "projects") ||
+                (link.href === "/blog" && window.location.pathname === "/blog") ||
+                (link.href === "/#testimonials" && activeSection === "testimonials") ||
+                (link.href === "/#contact" && activeSection === "contact");
+                
+              return (
+                <li key={link.name}>
+                  {link.href.startsWith('/') && !link.href.includes('#') ? (
+                    <Link 
+                      to={link.href} 
+                      className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-primary after:transition-all ${
+                        isActive 
+                          ? "text-foreground after:w-full" 
+                          : "text-foreground/80 hover:text-foreground after:w-0 hover:after:w-full"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={link.href} 
+                      className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-primary after:transition-all ${
+                        isActive 
+                          ? "text-foreground after:w-full" 
+                          : "text-foreground/80 hover:text-foreground after:w-0 hover:after:w-full"
+                      }`}
+                    >
+                      {link.name}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
           </ul>
           <ThemeSwitcher />
         </nav>
@@ -95,27 +142,44 @@ const Navbar = () => {
       >
         <nav className="container">
           <ul className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                {link.href.startsWith('/') ? (
-                  <Link 
-                    to={link.href} 
-                    className="block py-2 text-foreground/80 hover:text-foreground hover:pl-2 transition-all" 
-                    onClick={closeMenu}
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a 
-                    href={link.href} 
-                    className="block py-2 text-foreground/80 hover:text-foreground hover:pl-2 transition-all" 
-                    onClick={closeMenu}
-                  >
-                    {link.name}
-                  </a>
-                )}
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = 
+                (link.href === "/#home" && activeSection === "home") ||
+                (link.href === "/#about" && activeSection === "about") ||
+                (link.href === "/#career" && activeSection === "career") ||
+                (link.href === "/#skills" && activeSection === "skills") ||
+                (link.href === "/#education" && activeSection === "education") ||
+                (link.href === "/#projects" && activeSection === "projects") ||
+                (link.href === "/blog" && window.location.pathname === "/blog") ||
+                (link.href === "/#testimonials" && activeSection === "testimonials") ||
+                (link.href === "/#contact" && activeSection === "contact");
+              
+              return (
+                <li key={link.name}>
+                  {link.href.startsWith('/') && !link.href.includes('#') ? (
+                    <Link 
+                      to={link.href} 
+                      className={`block py-2 hover:pl-2 transition-all ${
+                        isActive ? "text-foreground font-medium" : "text-foreground/80 hover:text-foreground"
+                      }`}
+                      onClick={closeMenu}
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={link.href} 
+                      className={`block py-2 hover:pl-2 transition-all ${
+                        isActive ? "text-foreground font-medium" : "text-foreground/80 hover:text-foreground"
+                      }`}
+                      onClick={closeMenu}
+                    >
+                      {link.name}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>

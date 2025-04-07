@@ -25,7 +25,8 @@ const Index = () => {
       setShowScrollTop(window.scrollY > 300);
     };
     
-    window.addEventListener('scroll', handleScroll);
+    // Passive true improves scroll performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -55,7 +56,7 @@ const Index = () => {
       {/* Scroll to top button */}
       <button
         onClick={scrollToTop}
-        className={`fixed right-6 bottom-6 p-3 rounded-full bg-primary text-white shadow-lg transition-all ${
+        className={`fixed right-6 bottom-24 p-3 rounded-full bg-primary text-white shadow-lg transition-all ${
           showScrollTop ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
         }`}
         aria-label="Scroll to top"

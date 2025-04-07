@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect, useRef, ReactNode, useState } from 'react';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -17,15 +17,20 @@ const ScrollReveal = ({
   direction = 'up'
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
+    const currentRef = ref.current;
+    if (!currentRef) return;
+    
+    // Use the Intersection Observer API for better performance
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isVisible) {
+          // Only set once to avoid unnecessary rerenders
           setTimeout(() => {
-            entry.target.classList.add('reveal-visible');
+            setIsVisible(true);
           }, delay);
-          observer.unobserve(entry.target);
         }
       },
       {
@@ -34,16 +39,14 @@ const ScrollReveal = ({
       }
     );
     
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(currentRef);
     
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, [threshold, delay]);
+  }, [threshold, delay, isVisible]);
   
   // Define animation classes based on direction
   let animationClass = 'reveal-up';
@@ -54,7 +57,12 @@ const ScrollReveal = ({
   return (
     <div
       ref={ref}
-      className={`reveal ${animationClass} ${className}`}
+      className={`reveal ${animationClass} ${isVisible ? 'reveal-visible' : ''} ${className}`}
+      style={{ 
+        willChange: 'opacity, transform',
+        // Use hardware acceleration for smoother animations
+        transform: isVisible ? 'translate3d(0, 0, 0)' : undefined
+      }}
     >
       {children}
     </div>
