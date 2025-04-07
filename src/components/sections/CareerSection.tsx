@@ -11,44 +11,37 @@ const CareerSection = () => {
         <ScrollReveal>
           <SectionHeading 
             title="Career Journey"
-            subtitle="A timeline of my professional growth and key milestones in my career. 🚀"
+            subtitle="My educational path and aspirations in the tech world. 🚀"
           />
         </ScrollReveal>
         
         <ScrollReveal delay={200}>
           <Timeline>
             <TimelineItem 
-              year="2023 - Present"
-              title="Senior UI/UX Designer & Frontend Developer"
-              description="Leading design and development for enterprise applications, focusing on creating scalable design systems and accessible user interfaces. Mentoring junior designers and developers."
-              icon={<Briefcase size={18} />}
+              year="2024 - Present"
+              title="Computer Science Student"
+              description="Currently pursuing a Bachelor's degree in Computer Science at Meru University of Science and Technology. As a second-year student, I'm building a strong foundation in algorithms, data structures, software engineering, and computer networks."
+              icon={<GraduationCap size={18} />}
             />
             
             <TimelineItem 
-              year="2021 - 2023"
-              title="UI/UX Designer & Frontend Developer"
-              description="Designed and developed user interfaces for web and mobile applications. Conducted user research and usability testing to inform design decisions."
-              icon={<Briefcase size={18} />}
-            />
-            
-            <TimelineItem 
-              year="2020 - 2021"
-              title="Junior Frontend Developer"
-              description="Built responsive web applications using React and TypeScript. Collaborated with designers to implement pixel-perfect user interfaces."
+              year="2023 - 2024"
+              title="Freelance Web Developer"
+              description="Working on freelance projects to build responsive and user-friendly websites for clients. Focusing on modern frameworks like React and Next.js to deliver exceptional user experiences."
               icon={<Code size={18} />}
             />
             
             <TimelineItem 
-              year="2019 - 2020"
-              title="UI Design Intern"
-              description="Created wireframes, mockups, and prototypes for mobile applications. Assisted in user research and collecting feedback from stakeholders."
+              year="2023"
+              title="UI/UX Design Enthusiast"
+              description="Self-taught UI/UX design principles and practices. Created mockups and prototypes for personal projects and collaborative work. Learning design tools like Figma and Adobe XD."
               icon={<Layout size={18} />}
             />
             
             <TimelineItem 
-              year="2018 - 2019"
-              title="Computer Science Student"
-              description="Graduated with honors from the University of Nairobi with a BSc in Computer Science. Specialized in web technologies and human-computer interaction."
+              year="2020 - 2023"
+              title="High School"
+              description="Completed high school education with a focus on sciences and mathematics. Developed an interest in technology and programming through extracurricular activities."
               icon={<GraduationCap size={18} />}
             />
           </Timeline>

@@ -68,14 +68,22 @@ const HeroSection = () => {
           
           <ScrollReveal delay={1000} direction="right" className="md:col-span-5">
             <div className="relative w-full max-w-[400px] mx-auto">
-              {/* Dynamic background with floating particles */}
+              {/* Animated fluid/watery background effect */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
-                <div 
-                  className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 animate-pulse-slow"
-                  style={{
-                    transform: isMounted ? `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` : 'none'
-                  }}
-                ></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
+                
+                {/* Animated watery blob corners */}
+                <div className="absolute top-[-20px] left-[-20px] h-[100px] w-[100px] rounded-full bg-accent/30 blur-md animate-blob"></div>
+                <div className="absolute bottom-[-30px] right-[-10px] h-[120px] w-[120px] rounded-full bg-primary/30 blur-md animate-blob animation-delay-2000"></div>
+                <div className="absolute top-[60%] left-[-15px] h-[70px] w-[70px] rounded-full bg-primary/40 blur-md animate-blob animation-delay-4000"></div>
+                <div className="absolute top-[-10px] right-[25%] h-[80px] w-[80px] rounded-full bg-accent/40 blur-md animate-blob animation-delay-3000"></div>
+                
+                {/* Ripple effects */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_40%,_rgba(var(--primary),0.08)_70%)]"></div>
+                
+                {/* Moving waves */}
+                <div className="absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(var(--accent),0.1)_0%,transparent_100%)] animate-wave"></div>
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(0deg,rgba(var(--primary),0.1)_0%,transparent_100%)] animate-wave animation-delay-2000"></div>
                 
                 {/* Floating particles */}
                 <div className="absolute h-4 w-4 rounded-full bg-primary/40 animate-float" 
@@ -86,10 +94,6 @@ const HeroSection = () => {
                   style={{ top: '30%', right: '10%', animationDelay: '1s' }}></div>
                 <div className="absolute h-3 w-3 rounded-full bg-accent/50 animate-float" 
                   style={{ bottom: '20%', right: '15%', animationDelay: '2s' }}></div>
-                
-                {/* Light beam effect */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[150%] w-[10px] bg-gradient-to-t from-transparent via-primary/20 to-transparent animate-pulse-slow rotate-45"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[150%] w-[10px] bg-gradient-to-t from-transparent via-accent/20 to-transparent animate-pulse-slow -rotate-45"></div>
               </div>
               
               {/* Profile image with parallax effect */}

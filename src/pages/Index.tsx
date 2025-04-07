@@ -25,15 +25,37 @@ const Index = () => {
       setShowScrollTop(window.scrollY > 300);
     };
     
+    // Add hash change event to improve navigation
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          // Add slight delay to ensure smooth scrolling
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    // Check hash on initial load
+    handleHashChange();
+    
     // Passive true improves scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Fix: Add IDs to section wrappers that match the navbar links
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
