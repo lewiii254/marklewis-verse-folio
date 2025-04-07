@@ -67,7 +67,7 @@ const HeroSection = () => {
           </div>
           
           <ScrollReveal delay={1000} direction="right" className="md:col-span-5">
-            <div className="relative w-full max-w-[400px] mx-auto">
+            <div className="relative w-full max-w-[400px] mx-auto h-[400px]">
               {/* Enhanced animated fluid/watery background effect */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
@@ -102,10 +102,10 @@ const HeroSection = () => {
                   style={{ top: '40%', right: '30%', animationDelay: '3.5s' }}></div>
               </div>
               
-              {/* Profile image with parallax effect - ensuring it's visible */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Profile image with parallax effect - ensuring it's visible with z-index and size adjustments */}
+              <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div 
-                  className="w-5/6 h-5/6 relative z-10"
+                  className="w-[300px] h-[300px] relative"
                   style={{
                     transform: isMounted ? `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -0.8}px)` : 'none',
                     transition: 'transform 0.1s ease-out'
@@ -114,24 +114,25 @@ const HeroSection = () => {
                   <img 
                     src="/Pic2.jpeg" 
                     alt="Marklewis Mutugi"
-                    className="w-full h-full object-cover rounded-full border-4 border-background shadow-2xl z-10"
+                    className="w-full h-full object-cover rounded-full border-4 border-background shadow-2xl"
                     style={{
-                      filter: 'drop-shadow(0 0 10px rgba(var(--primary), 0.3))'
+                      filter: 'drop-shadow(0 0 10px rgba(var(--primary), 0.3))',
+                      zIndex: 30
                     }}
                   />
                 </div>
               </div>
               
               {/* Enhanced glowing border effect */}
-              <div className="absolute inset-0 rounded-full opacity-80"
+              <div className="absolute inset-0 rounded-full opacity-80 z-10"
                 style={{
                   background: 'radial-gradient(circle at center, transparent 60%, rgba(var(--primary), 0.2) 100%)'
                 }}
               ></div>
               
               {/* Animated ring rotation */}
-              <div className="absolute inset-[5%] border-2 border-dashed border-primary/30 rounded-full animate-[spin_40s_linear_infinite]"></div>
-              <div className="absolute inset-[15%] border-1 border-dotted border-accent/20 rounded-full animate-[spin_30s_linear_infinite_reverse]"></div>
+              <div className="absolute inset-[5%] border-2 border-dashed border-primary/30 rounded-full animate-[spin_40s_linear_infinite] z-10"></div>
+              <div className="absolute inset-[15%] border-1 border-dotted border-accent/20 rounded-full animate-[spin_30s_linear_infinite_reverse] z-10"></div>
               
               {/* Outer glow */}
               <div className="absolute inset-[-10%] blur-xl bg-gradient-to-br from-primary/10 to-accent/10 rounded-full"></div>
