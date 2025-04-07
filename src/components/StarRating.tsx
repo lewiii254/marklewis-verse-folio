@@ -9,6 +9,7 @@ interface StarRatingProps {
   initialRating?: number;
   onChange?: (rating: number) => void;
   className?: string;
+  onSave?: (rating: number) => Promise<void>;
 }
 
 const StarRating = ({
@@ -16,23 +17,47 @@ const StarRating = ({
   initialRating = 0,
   onChange,
   className,
+  onSave,
 }: StarRatingProps) => {
   const [rating, setRating] = useState(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
   const [isRated, setIsRated] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleRating = (selectedRating: number) => {
-    if (isRated) return;
+  const handleRating = async (selectedRating: number) => {
+    if (isRated || isSaving) return;
     
     setRating(selectedRating);
     setIsRated(true);
     onChange?.(selectedRating);
     
-    // Show thank you toast
-    toast.success(`Thank you for rating ${selectedRating} stars!`, {
-      description: "I appreciate your feedback!",
-      duration: 3000,
-    });
+    if (onSave) {
+      try {
+        setIsSaving(true);
+        await onSave(selectedRating);
+        // Show thank you toast after successful save
+        toast.success(`Thank you for rating ${selectedRating} stars!`, {
+          description: "Your feedback has been recorded!",
+          duration: 3000,
+        });
+      } catch (error) {
+        console.error("Error saving rating:", error);
+        toast.error("Could not save your rating", {
+          description: "Please try again later",
+          duration: 3000,
+        });
+        // Allow retrying if saving failed
+        setIsRated(false);
+      } finally {
+        setIsSaving(false);
+      }
+    } else {
+      // Original behavior if no save function provided
+      toast.success(`Thank you for rating ${selectedRating} stars!`, {
+        description: "I appreciate your feedback!",
+        duration: 3000,
+      });
+    }
     
     // Store rating in local storage
     localStorage.setItem('portfolioRating', selectedRating.toString());
@@ -50,12 +75,12 @@ const StarRating = ({
             type="button"
             className={cn(
               "transition-all transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background p-1 rounded-full",
-              isRated ? "cursor-default" : "cursor-pointer"
+              (isRated || isSaving) ? "cursor-default" : "cursor-pointer"
             )}
-            onMouseEnter={() => !isRated && setHoverRating(starValue)}
-            onMouseLeave={() => !isRated && setHoverRating(0)}
+            onMouseEnter={() => !isRated && !isSaving && setHoverRating(starValue)}
+            onMouseLeave={() => !isRated && !isSaving && setHoverRating(0)}
             onClick={() => handleRating(starValue)}
-            disabled={isRated}
+            disabled={isRated || isSaving}
             aria-label={`Rate ${starValue} star${starValue !== 1 ? 's' : ''}`}
           >
             <Star
@@ -63,13 +88,19 @@ const StarRating = ({
                 "transition-colors",
                 isActive 
                   ? "fill-primary text-primary" 
-                  : "fill-none text-muted-foreground hover:text-primary"
+                  : "fill-none text-muted-foreground hover:text-primary",
+                isSaving && "opacity-50"
               )}
               size={24}
             />
           </button>
         );
       })}
+      {isSaving && (
+        <span className="ml-2 text-xs text-muted-foreground animate-pulse">
+          Saving...
+        </span>
+      )}
     </div>
   );
 };
