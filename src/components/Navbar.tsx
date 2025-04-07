@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Code, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
 
@@ -67,9 +67,18 @@ const Navbar = () => {
       <div className="container flex items-center justify-between">
         <Link 
           to="/" 
-          className="font-heading text-xl font-bold flex items-center gap-1"
+          className="font-heading text-xl font-bold flex items-center gap-2"
         >
-          <span className="text-gradient">Mark.Lewis</span>
+          {/* Fancy animated logo */}
+          <div className="relative flex items-center">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
+            <div className="relative flex items-center justify-center w-10 h-10 bg-background rounded-lg ring-1 ring-primary/30 overflow-hidden">
+              <Code className="text-primary w-6 h-6 z-10" />
+              <Sparkles className="absolute text-accent/80 w-8 h-8 animate-pulse-slow" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 animate-pulse"></div>
+            </div>
+            <span className="text-gradient ml-2 font-extrabold tracking-tight">Mark<span className="text-accent">Lewis</span></span>
+          </div>
         </Link>
         
         {/* Desktop Nav */}

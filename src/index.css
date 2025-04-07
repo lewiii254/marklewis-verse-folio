@@ -208,6 +208,21 @@
     animation-delay: 4s;
   }
 
+  /* Pulse animation for the logo */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Gradient shift animation for the logo */
+  .animate-gradient-shift {
+    animation: gradient-shift 8s ease infinite;
+  }
+  
+  /* Float animation for particles */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
   /* For screen readers only */
   .sr-only {
     position: absolute;
@@ -251,6 +266,32 @@
   }
 }
 
+/* Add gradient shift animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add float animation */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /* Optimize animations for devices that prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -260,4 +301,3 @@
     scroll-behavior: auto !important;
   }
 }
-

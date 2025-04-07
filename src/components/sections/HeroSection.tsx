@@ -68,38 +68,44 @@ const HeroSection = () => {
           
           <ScrollReveal delay={1000} direction="right" className="md:col-span-5">
             <div className="relative w-full max-w-[400px] mx-auto">
-              {/* Animated fluid/watery background effect */}
+              {/* Enhanced animated fluid/watery background effect */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
                 
-                {/* Animated watery blob corners */}
-                <div className="absolute top-[-20px] left-[-20px] h-[100px] w-[100px] rounded-full bg-accent/30 blur-md animate-blob"></div>
-                <div className="absolute bottom-[-30px] right-[-10px] h-[120px] w-[120px] rounded-full bg-primary/30 blur-md animate-blob animation-delay-2000"></div>
-                <div className="absolute top-[60%] left-[-15px] h-[70px] w-[70px] rounded-full bg-primary/40 blur-md animate-blob animation-delay-4000"></div>
-                <div className="absolute top-[-10px] right-[25%] h-[80px] w-[80px] rounded-full bg-accent/40 blur-md animate-blob animation-delay-3000"></div>
+                {/* Amplified watery blob corners */}
+                <div className="absolute top-[-20px] left-[-20px] h-[100px] w-[100px] rounded-full bg-accent/40 blur-lg animate-blob"></div>
+                <div className="absolute bottom-[-30px] right-[-10px] h-[120px] w-[120px] rounded-full bg-primary/40 blur-lg animate-blob animation-delay-2000"></div>
+                <div className="absolute top-[60%] left-[-15px] h-[70px] w-[70px] rounded-full bg-primary/50 blur-lg animate-blob animation-delay-4000"></div>
+                <div className="absolute top-[-10px] right-[25%] h-[80px] w-[80px] rounded-full bg-accent/50 blur-lg animate-blob animation-delay-3000"></div>
                 
-                {/* Ripple effects */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_40%,_rgba(var(--primary),0.08)_70%)]"></div>
+                {/* Enhanced ripple effects */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_40%,_rgba(var(--primary),0.15)_70%)]"></div>
                 
-                {/* Moving waves */}
-                <div className="absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(var(--accent),0.1)_0%,transparent_100%)] animate-wave"></div>
-                <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(0deg,rgba(var(--primary),0.1)_0%,transparent_100%)] animate-wave animation-delay-2000"></div>
+                {/* More pronounced moving waves */}
+                <div className="absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(var(--accent),0.2)_0%,transparent_100%)] animate-wave"></div>
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(0deg,rgba(var(--primary),0.2)_0%,transparent_100%)] animate-wave animation-delay-2000"></div>
                 
-                {/* Floating particles */}
-                <div className="absolute h-4 w-4 rounded-full bg-primary/40 animate-float" 
+                {/* More floating particles */}
+                <div className="absolute h-4 w-4 rounded-full bg-primary/60 blur-sm animate-float" 
                   style={{ top: '20%', left: '10%', animationDelay: '0s' }}></div>
-                <div className="absolute h-3 w-3 rounded-full bg-primary/50 animate-float" 
+                <div className="absolute h-3 w-3 rounded-full bg-primary/70 blur-sm animate-float" 
                   style={{ top: '70%', left: '15%', animationDelay: '1.5s' }}></div>
-                <div className="absolute h-5 w-5 rounded-full bg-accent/40 animate-float" 
+                <div className="absolute h-5 w-5 rounded-full bg-accent/60 blur-sm animate-float" 
                   style={{ top: '30%', right: '10%', animationDelay: '1s' }}></div>
-                <div className="absolute h-3 w-3 rounded-full bg-accent/50 animate-float" 
+                <div className="absolute h-3 w-3 rounded-full bg-accent/70 blur-sm animate-float" 
                   style={{ bottom: '20%', right: '15%', animationDelay: '2s' }}></div>
+                
+                {/* Additional watery particles */}
+                <div className="absolute h-6 w-6 rounded-full bg-primary/30 blur-lg animate-float" 
+                  style={{ top: '50%', left: '50%', animationDelay: '2.5s' }}></div>
+                <div className="absolute h-4 w-4 rounded-full bg-accent/30 blur-lg animate-float" 
+                  style={{ top: '40%', right: '30%', animationDelay: '3.5s' }}></div>
               </div>
               
-              {/* Profile image with parallax effect */}
+              {/* Profile image with parallax effect - ensuring it's visible */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div 
-                  className="w-4/5 h-4/5 relative"
+                  className="w-5/6 h-5/6 relative z-10"
                   style={{
                     transform: isMounted ? `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -0.8}px)` : 'none',
                     transition: 'transform 0.1s ease-out'
@@ -108,26 +114,27 @@ const HeroSection = () => {
                   <img 
                     src="/Pic2.jpeg" 
                     alt="Marklewis Mutugi"
-                    className="w-full h-full object-cover rounded-full border-4 border-background shadow-2xl"
+                    className="w-full h-full object-cover rounded-full border-4 border-background shadow-2xl z-10"
                     style={{
-                      filter: 'drop-shadow(0 0 8px rgba(var(--primary), 0.2))'
+                      filter: 'drop-shadow(0 0 10px rgba(var(--primary), 0.3))'
                     }}
                   />
                 </div>
               </div>
               
-              {/* Glowing border effect */}
-              <div className="absolute inset-0 rounded-full opacity-75"
+              {/* Enhanced glowing border effect */}
+              <div className="absolute inset-0 rounded-full opacity-80"
                 style={{
-                  background: 'radial-gradient(circle at center, transparent 60%, rgba(var(--primary), 0.15) 100%)'
+                  background: 'radial-gradient(circle at center, transparent 60%, rgba(var(--primary), 0.2) 100%)'
                 }}
               ></div>
               
-              {/* Ring rotation animation */}
-              <div className="absolute inset-[10%] border-2 border-dashed border-primary/20 rounded-full animate-[spin_40s_linear_infinite]"></div>
+              {/* Animated ring rotation */}
+              <div className="absolute inset-[5%] border-2 border-dashed border-primary/30 rounded-full animate-[spin_40s_linear_infinite]"></div>
+              <div className="absolute inset-[15%] border-1 border-dotted border-accent/20 rounded-full animate-[spin_30s_linear_infinite_reverse]"></div>
               
               {/* Outer glow */}
-              <div className="absolute inset-[-10%] blur-xl bg-gradient-to-br from-primary/5 to-accent/5 rounded-full"></div>
+              <div className="absolute inset-[-10%] blur-xl bg-gradient-to-br from-primary/10 to-accent/10 rounded-full"></div>
             </div>
           </ScrollReveal>
         </div>
