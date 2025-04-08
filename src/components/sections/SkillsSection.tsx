@@ -62,23 +62,26 @@ const SkillsSection = () => {
   // Combine all skills for single continuous carousel
   const allSkills = [...designTools, ...developmentSkills, ...softSkills];
 
-  // Auto-scrolling functionality
+  // Auto-scrolling functionality - now truly automatic
   useEffect(() => {
     if (inView && autoPlay) {
+      const carouselContent = document.querySelector('.skills-carousel-content');
+      let scrollPosition = 0;
+      
       const scrollCarousel = () => {
-        const content = document.querySelector('.skills-carousel-content');
-        if (content) {
-          const scrollAmount = 1; // Pixels to scroll per interval
-          content.scrollLeft += scrollAmount;
+        if (carouselContent) {
+          scrollPosition += 1;
+          carouselContent.scrollLeft = scrollPosition;
           
           // Reset to beginning when reaching the end
-          if (content.scrollLeft >= content.scrollWidth - content.clientWidth - 10) {
-            content.scrollLeft = 0;
+          if (scrollPosition >= carouselContent.scrollWidth - carouselContent.clientWidth) {
+            scrollPosition = 0;
+            carouselContent.scrollLeft = 0;
           }
         }
       };
-
-      autoPlayRef.current = setInterval(scrollCarousel, 30); // Smooth scrolling
+      
+      autoPlayRef.current = setInterval(scrollCarousel, 30);
     } else if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
