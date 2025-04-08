@@ -1,4 +1,3 @@
-
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 import SkillCard from "@/components/SkillCard";
@@ -25,8 +24,8 @@ const SkillsSection = () => {
   const [animatedSkills, setAnimatedSkills] = useState<{[key: string]: number}>({});
   const { ref, inView } = useInView({ threshold: 0.1 });
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const scrollPositionRef = useRef(0);
+  const animationRef = useRef<number | null>(null);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
 
   // Design skills
   const designTools = [
@@ -63,38 +62,44 @@ const SkillsSection = () => {
   // Combine all skills for single continuous carousel
   const allSkills = [...designTools, ...developmentSkills, ...softSkills];
 
-  // Auto-scrolling functionality - continuous automatic scrolling
-  useEffect(() => {
-    const startAutoScroll = () => {
-      const content = carouselRef.current;
-      if (!content) return;
-
-      scrollIntervalRef.current = setInterval(() => {
-        if (content) {
-          // Increment the scroll position
-          scrollPositionRef.current += 1;
-          content.scrollLeft = scrollPositionRef.current;
-          
-          // Check if we've reached the end
-          if (scrollPositionRef.current >= content.scrollWidth - content.clientWidth) {
-            // Reset to start with a small delay to make it look smooth
-            scrollPositionRef.current = 0;
-            content.scrollLeft = 0;
-          }
-        }
-      }, 30);
-    };
-
-    if (inView) {
-      startAutoScroll();
+  // Improved auto-scrolling with requestAnimationFrame for smoother animation
+  const autoScroll = () => {
+    if (!carouselRef.current || !autoScrollEnabled) return;
+    
+    const scrollPosition = carouselRef.current.scrollLeft;
+    const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+    
+    // If we've reached the end, reset to the beginning with a small delay
+    if (scrollPosition >= maxScroll - 5) {
+      carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
+    } else {
+      // Otherwise, keep scrolling
+      carouselRef.current.scrollLeft += 1;
     }
+    
+    // Continue the animation loop
+    animationRef.current = requestAnimationFrame(autoScroll);
+  };
 
+  // Start/stop auto-scrolling when component is in view
+  useEffect(() => {
+    if (inView && autoScrollEnabled) {
+      animationRef.current = requestAnimationFrame(autoScroll);
+    } else if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+    
+    // Cleanup animation frame on unmount
     return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [inView]);
+  }, [inView, autoScrollEnabled]);
+
+  // Pause scrolling on hover/touch
+  const pauseAutoScroll = () => setAutoScrollEnabled(false);
+  const resumeAutoScroll = () => setAutoScrollEnabled(true);
 
   // Animate skill bars when in view
   useEffect(() => {
@@ -141,9 +146,26 @@ const SkillsSection = () => {
                 <CarouselContent 
                   className="skills-carousel-content" 
                   ref={carouselRef}
+                  onMouseEnter={pauseAutoScroll}
+                  onMouseLeave={resumeAutoScroll}
+                  onTouchStart={pauseAutoScroll}
+                  onTouchEnd={resumeAutoScroll}
                 >
                   {allSkills.map((skill, index) => (
                     <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 pl-4">
+                      <div className="p-1">
+                        <SkillCard 
+                          name={skill.name} 
+                          icon={skill.icon} 
+                          className="glass-border" 
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                  
+                  {/* Duplicate the first few items to create seamless looping effect */}
+                  {allSkills.slice(0, 6).map((skill, index) => (
+                    <CarouselItem key={`dup-${index}`} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 pl-4">
                       <div className="p-1">
                         <SkillCard 
                           name={skill.name} 
