@@ -22,10 +22,11 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const SkillsSection = () => {
-  const [autoPlay, setAutoPlay] = useState(true);
-  const { ref, inView } = useInView({ threshold: 0.1 });
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const [animatedSkills, setAnimatedSkills] = useState<{[key: string]: number}>({});
+  const { ref, inView } = useInView({ threshold: 0.1 });
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollPositionRef = useRef(0);
 
   // Design skills
   const designTools = [
@@ -62,36 +63,38 @@ const SkillsSection = () => {
   // Combine all skills for single continuous carousel
   const allSkills = [...designTools, ...developmentSkills, ...softSkills];
 
-  // Auto-scrolling functionality - now truly automatic
+  // Auto-scrolling functionality - continuous automatic scrolling
   useEffect(() => {
-    if (inView && autoPlay) {
-      const carouselContent = document.querySelector('.skills-carousel-content');
-      let scrollPosition = 0;
-      
-      const scrollCarousel = () => {
-        if (carouselContent) {
-          scrollPosition += 1;
-          carouselContent.scrollLeft = scrollPosition;
+    const startAutoScroll = () => {
+      const content = carouselRef.current;
+      if (!content) return;
+
+      scrollIntervalRef.current = setInterval(() => {
+        if (content) {
+          // Increment the scroll position
+          scrollPositionRef.current += 1;
+          content.scrollLeft = scrollPositionRef.current;
           
-          // Reset to beginning when reaching the end
-          if (scrollPosition >= carouselContent.scrollWidth - carouselContent.clientWidth) {
-            scrollPosition = 0;
-            carouselContent.scrollLeft = 0;
+          // Check if we've reached the end
+          if (scrollPositionRef.current >= content.scrollWidth - content.clientWidth) {
+            // Reset to start with a small delay to make it look smooth
+            scrollPositionRef.current = 0;
+            content.scrollLeft = 0;
           }
         }
-      };
-      
-      autoPlayRef.current = setInterval(scrollCarousel, 30);
-    } else if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current);
+      }, 30);
+    };
+
+    if (inView) {
+      startAutoScroll();
     }
 
     return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
       }
     };
-  }, [inView, autoPlay]);
+  }, [inView]);
 
   // Animate skill bars when in view
   useEffect(() => {
@@ -120,10 +123,7 @@ const SkillsSection = () => {
           />
         </ScrollReveal>
         
-        <div className="mt-10 overflow-hidden" 
-          onMouseEnter={() => setAutoPlay(false)}
-          onMouseLeave={() => setAutoPlay(true)}
-        >
+        <div className="mt-10 overflow-hidden">
           <ScrollReveal delay={300}>
             <div className="relative">
               {/* Fade gradient at edges */}
@@ -138,7 +138,10 @@ const SkillsSection = () => {
                 }}
                 className="w-full"
               >
-                <CarouselContent className="skills-carousel-content">
+                <CarouselContent 
+                  className="skills-carousel-content" 
+                  ref={carouselRef}
+                >
                   {allSkills.map((skill, index) => (
                     <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 pl-4">
                       <div className="p-1">
