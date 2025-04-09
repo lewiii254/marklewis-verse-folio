@@ -6,9 +6,15 @@ import StarRating from '@/components/StarRating';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from 'sonner';
 
+// Create a timestamp-based unique ID
+const createUniqueId = () => {
+  return `rating_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+};
+
 const RatingSection = () => {
   const [hasRated, setHasRated] = useState(false);
   const [savedRating, setSavedRating] = useState(0);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     // Check if user has already rated
@@ -17,6 +23,16 @@ const RatingSection = () => {
       setHasRated(true);
       setSavedRating(parseInt(rating, 10));
     }
+    
+    // Generate or retrieve a unique user ID
+    const existingId = localStorage.getItem('portfolioUserId');
+    if (existingId) {
+      setUserId(existingId);
+    } else {
+      const newId = createUniqueId();
+      setUserId(newId);
+      localStorage.setItem('portfolioUserId', newId);
+    }
   }, []);
 
   // Function to save the rating to a backend service
@@ -24,6 +40,8 @@ const RatingSection = () => {
     try {
       // Get some basic anonymous analytics data
       const data = {
+        ratingId: createUniqueId(),
+        userId: userId,
         rating,
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
@@ -32,11 +50,12 @@ const RatingSection = () => {
         screenHeight: window.innerHeight,
         referrer: document.referrer || 'direct',
         path: window.location.pathname,
+        comments: '', // This could be populated if you add a comment field
       };
 
-      // Send to a public JSON storage service
-      // This is a simple demonstration service that stores the data publicly
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      // Send to Formspree - replace this URL with your own Formspree endpoint
+      // Get a free endpoint at https://formspree.io/
+      const response = await fetch('https://formspree.io/f/xayzpzag', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,13 +67,13 @@ const RatingSection = () => {
         throw new Error('Network response was not ok');
       }
 
-      // In a real application, you would use a proper backend API
+      console.log('Rating submitted successfully:', data);
+      
       // Store the result in localStorage for persistence on client
       const result = await response.json();
-      console.log('Rating saved:', result);
       
       // In a real application, you might want to store the unique ID
-      localStorage.setItem('portfolioRatingId', result.id);
+      localStorage.setItem('portfolioRatingId', data.ratingId);
       
       // Set the state to display the rated view
       setHasRated(true);

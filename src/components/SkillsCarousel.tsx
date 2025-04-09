@@ -15,12 +15,29 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const animationRef = useRef<number | null>(null);
   const { ref, inView } = useInView({ threshold: 0.1 });
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Auto-scroll function
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  // Auto-scroll function with dynamic speed based on device
   const autoScroll = () => {
     if (!containerRef.current || !autoScrollEnabled) return;
     
-    containerRef.current.scrollLeft += 1;
+    // Scroll faster on mobile devices
+    const scrollAmount = isMobile ? 1.8 : 1;
+    containerRef.current.scrollLeft += scrollAmount;
     
     // Reset scroll position when reaching the end
     if (containerRef.current.scrollLeft >= containerRef.current.scrollWidth - containerRef.current.clientWidth - 5) {
@@ -60,7 +77,7 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
     return () => {
       stopAutoScroll();
     };
-  }, [inView, autoScrollEnabled]);
+  }, [inView, autoScrollEnabled, isMobile]);
 
   return (
     <div ref={ref} className="relative overflow-hidden">
