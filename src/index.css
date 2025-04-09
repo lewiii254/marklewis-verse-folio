@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -96,11 +95,13 @@
     @apply scroll-smooth dark; /* Add dark class by default */
     scroll-behavior: smooth !important;
     -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
   }
   
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overscroll-behavior: none; /* Prevents bounce effect on some browsers */
+    touch-action: manipulation; /* Improves touch response */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -153,7 +154,15 @@
     @apply hover:shadow-primary/20;
   }
 
-  /* Scroll Reveal Animations */
+  .scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
   .reveal {
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Use more performant cubic-bezier */
@@ -187,7 +196,6 @@
     transform: translate(0);
   }
 
-  /* Blob/fluid animations */
   .animate-blob {
     animation: blob 7s infinite;
   }
@@ -208,22 +216,18 @@
     animation-delay: 4s;
   }
 
-  /* Pulse animation for the logo */
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
-  /* Gradient shift animation for the logo */
   .animate-gradient-shift {
     animation: gradient-shift 8s ease infinite;
   }
   
-  /* Float animation for particles */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
-  /* For screen readers only */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -237,7 +241,6 @@
   }
 }
 
-/* Add blob animation keyframes */
 @keyframes blob {
   0% {
     transform: scale(1) translate(0px, 0px);
@@ -253,7 +256,6 @@
   }
 }
 
-/* Add wave animation keyframes */
 @keyframes wave {
   0% {
     transform: translateY(0) scaleY(1);
@@ -266,7 +268,6 @@
   }
 }
 
-/* Add gradient shift animation */
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
@@ -279,7 +280,6 @@
   }
 }
 
-/* Add float animation */
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -292,12 +292,21 @@
   }
 }
 
-/* Optimize animations for devices that prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (hover: none) {
+  .hover-lift:active {
+    transform: translateY(-1px);
+  }
+  
+  * {
+    transition-duration: 0.15s !important;
   }
 }

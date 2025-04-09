@@ -69,17 +69,17 @@ const Navbar = () => {
           to="/" 
           className="font-heading text-xl font-bold flex items-center gap-2"
         >
-          {/* Enhanced logo with better visibility in dark mode */}
+          {/* Improved logo with better color contrast */}
           <div className="relative flex items-center">
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
-            <div className="relative flex items-center justify-center w-10 h-10 bg-background rounded-lg ring-1 ring-indigo-500/50 overflow-hidden">
-              <Code className="text-indigo-400 w-6 h-6 z-10" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-400 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
+            <div className="relative flex items-center justify-center w-10 h-10 bg-background rounded-lg ring-1 ring-white/50 overflow-hidden">
+              <Code className="text-white w-6 h-6 z-10" />
               <Sparkles className="absolute text-white/90 w-8 h-8 animate-pulse-slow" />
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-purple-500/20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/40 to-purple-500/40 animate-pulse"></div>
             </div>
             <span className="ml-2 font-extrabold tracking-tight">
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Mark</span>
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Lewis</span>
+              <span className="text-white bg-clip-text">Mark</span>
+              <span className="text-white bg-clip-text">Lewis</span>
             </span>
           </div>
         </Link>
