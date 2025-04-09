@@ -7,11 +7,11 @@ import { Award, Clipboard, GraduationCap, Medal } from "lucide-react";
 const EducationSection = () => {
   const certificates = [
     { 
-      title: "Google UX Design Professional Certificate", 
-      issuer: "Google", 
+      title: "S-Hook x PLP Hackathon", 
+      issuer: "Power Learn Project", 
       date: "2025", 
       icon: <Clipboard />,
-      imageUrl: "/uiux.jpeg" 
+      imageUrl: "/shook.png" 
     },
     { 
       title: "AWS Certified Developer", 
