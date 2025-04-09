@@ -55,7 +55,7 @@ const RatingSection = () => {
 
       // Send to Formspree - replace this URL with your own Formspree endpoint
       // Get a free endpoint at https://formspree.io/
-      const response = await fetch('https://formspree.io/f/xayzpzag', {
+      const response = await fetch('https://formspree.io/f/maneawkk', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
