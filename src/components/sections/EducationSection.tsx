@@ -14,11 +14,11 @@ const EducationSection = () => {
       imageUrl: "/shook.png" 
     },
     { 
-      title: "AWS Certified Developer", 
-      issuer: "Amazon Web Services", 
+      title: "Certified Web Developer", 
+      issuer: "Simplearn", 
       date: "2024", 
       icon: <Award />,
-      imageUrl: "/react.jpeg" 
+      imageUrl: "/simplearn.png" 
     },
     { 
       title: "React Native Specialist", 
@@ -41,10 +41,11 @@ const EducationSection = () => {
       icon: <Award /> 
     },
     { 
-      title: "Python for Data Science", 
-      issuer: "IBM", 
+      title: "Networking Specialist", 
+      issuer: "Cisco Networking Academy", 
       date: "2024", 
-      icon: <Medal /> 
+      icon: <Medal />,
+      imageUrl: "/cisco.png"
     }
   ];
 
