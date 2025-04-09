@@ -5,6 +5,8 @@ import SectionHeading from '@/components/SectionHeading';
 import StarRating from '@/components/StarRating';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { InfoIcon } from 'lucide-react';
 
 // Create a timestamp-based unique ID
 const createUniqueId = () => {
@@ -16,6 +18,7 @@ const RatingSection = () => {
   const [savedRating, setSavedRating] = useState(0);
   const [userId, setUserId] = useState('');
   const [feedbackSent, setFeedbackSent] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if user has already rated
@@ -45,11 +48,13 @@ const RatingSection = () => {
   // Function to save the rating to a backend service
   const saveRating = async (rating: number) => {
     try {
+      setSubmitError(null);
+      
       // Get some basic anonymous analytics data
-      const data = {
+      const formData = {
         ratingId: createUniqueId(),
         userId: userId,
-        rating,
+        rating: rating,
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
         language: navigator.language,
@@ -57,26 +62,32 @@ const RatingSection = () => {
         screenHeight: window.innerHeight,
         referrer: document.referrer || 'direct',
         path: window.location.pathname,
-        comments: '', // This could be populated if you add a comment field
+        message: `Portfolio Rating: ${rating} stars`, // Add explicit message for email
+        _subject: `New Portfolio Rating: ${rating} stars`, // Add subject line for email
       };
 
-      // Send to Formspree endpoint
+      console.log('Submitting rating to Formspree:', formData);
+
+      // Send to Formspree endpoint - using proper form submission format
       const response = await fetch('https://formspree.io/f/maneawkk', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
+      const responseData = await response.json();
+      
+      console.log('Formspree response:', responseData);
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(responseData.error || 'Network response was not ok');
       }
 
-      console.log('Rating submitted successfully:', data);
-      
       // Store the result in localStorage for persistence on client
-      localStorage.setItem('portfolioRatingId', data.ratingId);
+      localStorage.setItem('portfolioRatingId', formData.ratingId);
       localStorage.setItem('portfolioFeedbackSent', 'true');
       
       // Set the state to display the rated view
@@ -91,6 +102,9 @@ const RatingSection = () => {
       });
     } catch (error) {
       console.error('Error saving rating:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setSubmitError(errorMessage);
+      
       toast.error('Could not submit your rating', {
         description: 'Please try again later',
         duration: 3000,
@@ -146,6 +160,16 @@ const RatingSection = () => {
                   <p className="mt-2 text-xs text-muted-foreground/70 text-center">
                     Ratings are collected anonymously to help improve this portfolio
                   </p>
+                  
+                  {submitError && (
+                    <Alert variant="destructive" className="mt-4">
+                      <InfoIcon className="h-4 w-4" />
+                      <AlertTitle>Error submitting rating</AlertTitle>
+                      <AlertDescription>
+                        {submitError}
+                      </AlertDescription>
+                    </Alert>
+                  )}
                 </>
               )}
             </CardContent>
