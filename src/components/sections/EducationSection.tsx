@@ -21,24 +21,25 @@ const EducationSection = () => {
       imageUrl: "/simplearn.png" 
     },
     { 
-      title: "React Native Specialist", 
-      issuer: "Meta (Facebook)", 
+      title: "Aspire Leaders Program", 
+      issuer: "Aspire Harvard Institute", 
       date: "2025", 
       icon: <Medal />,
-      imageUrl: "/DesignSystem.jpeg" 
+      imageUrl: "/Aspire.png" 
     },
     { 
       title: "Advanced JavaScript Certification", 
       issuer: "freeCodeCamp", 
       date: "2025", 
       icon: <Clipboard />,
-      imageUrl: "/SDLC.jpeg" 
+      imageUrl: "/certificate.png" 
     },
     { 
-      title: "UI/UX Design Mastery", 
-      issuer: "Interaction Design Foundation", 
+      title: "Power BI specialist", 
+      issuer: "Exodus Experts", 
       date: "2025", 
-      icon: <Award /> 
+      icon: <Award />,
+      imageUrl: "/powerbi.png" 
     },
     { 
       title: "Networking Specialist", 
