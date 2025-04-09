@@ -15,6 +15,7 @@ const RatingSection = () => {
   const [hasRated, setHasRated] = useState(false);
   const [savedRating, setSavedRating] = useState(0);
   const [userId, setUserId] = useState('');
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   useEffect(() => {
     // Check if user has already rated
@@ -32,6 +33,12 @@ const RatingSection = () => {
       const newId = createUniqueId();
       setUserId(newId);
       localStorage.setItem('portfolioUserId', newId);
+    }
+
+    // Check if feedback was already sent
+    const feedback = localStorage.getItem('portfolioFeedbackSent');
+    if (feedback) {
+      setFeedbackSent(true);
     }
   }, []);
 
@@ -53,8 +60,7 @@ const RatingSection = () => {
         comments: '', // This could be populated if you add a comment field
       };
 
-      // Send to Formspree - replace this URL with your own Formspree endpoint
-      // Get a free endpoint at https://formspree.io/
+      // Send to Formspree endpoint
       const response = await fetch('https://formspree.io/f/maneawkk', {
         method: 'POST',
         headers: {
@@ -70,16 +76,25 @@ const RatingSection = () => {
       console.log('Rating submitted successfully:', data);
       
       // Store the result in localStorage for persistence on client
-      const result = await response.json();
-      
-      // In a real application, you might want to store the unique ID
       localStorage.setItem('portfolioRatingId', data.ratingId);
+      localStorage.setItem('portfolioFeedbackSent', 'true');
       
       // Set the state to display the rated view
       setHasRated(true);
       setSavedRating(rating);
+      setFeedbackSent(true);
+
+      // Show confirmation toast
+      toast.success('Thank you for your rating!', {
+        description: `You rated my portfolio ${rating} stars. I appreciate your feedback!`,
+        duration: 5000,
+      });
     } catch (error) {
       console.error('Error saving rating:', error);
+      toast.error('Could not submit your rating', {
+        description: 'Please try again later',
+        duration: 3000,
+      });
       throw error; // Re-throw to let the StarRating component handle it
     }
   };
@@ -109,6 +124,12 @@ const RatingSection = () => {
                   <p className="mt-4 text-muted-foreground text-center text-sm">
                     Thank you for your feedback! I appreciate you taking the time to rate my work.
                   </p>
+                  {feedbackSent && (
+                    <div className="mt-4 p-3 bg-primary/10 rounded-md text-sm text-center">
+                      <p className="font-medium text-primary">Feedback sent successfully! ✓</p>
+                      <p className="text-muted-foreground mt-1">Your rating has been recorded and will help me improve.</p>
+                    </div>
+                  )}
                 </>
               ) : (
                 <>
