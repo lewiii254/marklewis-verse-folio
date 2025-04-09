@@ -2,12 +2,14 @@
 import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface CertificateCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   issuer: string;
   date: string;
   icon: React.ReactNode;
+  imageUrl?: string;
 }
 
 const CertificateCard = ({ 
@@ -15,6 +17,7 @@ const CertificateCard = ({
   issuer, 
   date, 
   icon, 
+  imageUrl,
   className, 
   ...props 
 }: CertificateCardProps) => {
@@ -26,7 +29,23 @@ const CertificateCard = ({
       )} 
       {...props}
     >
-      <CardContent className="p-6 flex flex-col gap-4">
+      {imageUrl && (
+        <div className="relative">
+          <AspectRatio ratio={16/9}>
+            <img 
+              src={imageUrl} 
+              alt={`${title} certificate`} 
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+        </div>
+      )}
+      
+      <CardContent className={cn(
+        "p-6 flex flex-col gap-4",
+        imageUrl ? "relative -mt-12 z-10 bg-gradient-to-t from-background via-background/95 to-background/80" : ""
+      )}>
         <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
           {icon}
         </div>

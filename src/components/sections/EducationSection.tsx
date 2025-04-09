@@ -6,12 +6,46 @@ import { Award, Clipboard, GraduationCap, Medal } from "lucide-react";
 
 const EducationSection = () => {
   const certificates = [
-    { title: "Google UX Design Professional Certificate", issuer: "Google", date: "2025", icon: <Clipboard /> },
-    { title: "AWS Certified Developer", issuer: "Amazon Web Services", date: "2024", icon: <Award /> },
-    { title: "React Native Specialist", issuer: "Meta (Facebook)", date: "2025", icon: <Medal /> },
-    { title: "Advanced JavaScript Certification", issuer: "freeCodeCamp", date: "2025", icon: <Clipboard /> },
-    { title: "UI/UX Design Mastery", issuer: "Interaction Design Foundation", date: "2025", icon: <Award /> },
-    { title: "Python for Data Science", issuer: "IBM", date: "2024", icon: <Medal /> }
+    { 
+      title: "Google UX Design Professional Certificate", 
+      issuer: "Google", 
+      date: "2025", 
+      icon: <Clipboard />,
+      imageUrl: "/uiux.jpeg" 
+    },
+    { 
+      title: "AWS Certified Developer", 
+      issuer: "Amazon Web Services", 
+      date: "2024", 
+      icon: <Award />,
+      imageUrl: "/react.jpeg" 
+    },
+    { 
+      title: "React Native Specialist", 
+      issuer: "Meta (Facebook)", 
+      date: "2025", 
+      icon: <Medal />,
+      imageUrl: "/DesignSystem.jpeg" 
+    },
+    { 
+      title: "Advanced JavaScript Certification", 
+      issuer: "freeCodeCamp", 
+      date: "2025", 
+      icon: <Clipboard />,
+      imageUrl: "/SDLC.jpeg" 
+    },
+    { 
+      title: "UI/UX Design Mastery", 
+      issuer: "Interaction Design Foundation", 
+      date: "2025", 
+      icon: <Award /> 
+    },
+    { 
+      title: "Python for Data Science", 
+      issuer: "IBM", 
+      date: "2024", 
+      icon: <Medal /> 
+    }
   ];
 
   return (
@@ -39,7 +73,7 @@ const EducationSection = () => {
                   <div>
                     <h4 className="text-xl font-bold">Bachelor of Science in Computer Science💻</h4>
                     <p className="text-lg text-primary">Meru University of Science and Technology</p>
-                    <p className="mt-2 text-muted-foreground">Currently pursuing a Bachelor’s degree in Computer Science. As a second-year student, I’m building a strong foundation in algorithms, data structures, software engineering, and computer networks.</p>
+                    <p className="mt-2 text-muted-foreground">Currently pursuing a Bachelor's degree in Computer Science. As a second-year student, I'm building a strong foundation in algorithms, data structures, software engineering, and computer networks.</p>
                   </div>
                   <div className="text-right md:whitespace-nowrap">
                     <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2024 - 2028</span>
@@ -81,6 +115,7 @@ const EducationSection = () => {
                   issuer={cert.issuer}
                   date={cert.date}
                   icon={cert.icon}
+                  imageUrl={cert.imageUrl}
                 />
               </ScrollReveal>
             ))}
