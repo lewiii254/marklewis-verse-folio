@@ -46,7 +46,7 @@ const HeroSection = () => {
             
             <ScrollReveal delay={600} direction="left">
               <p className="text-xl text-muted-foreground">
-                I craft intuitive digital experiences that bridge the gap between user needs and business goals. With expertise in UI/UX design and software development, I bring ideas to life with code. <span className="text-primary">✨</span>
+              I craft intuitive digital solutions that connect real user needs with impactful innovation. With a blend of UI/UX design and full-stack development, I bring bold ideas to life — one line of code at a time. 🚀 <span className="text-primary">✨</span>
               </p>
             </ScrollReveal>
             
