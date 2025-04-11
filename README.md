@@ -1,73 +1,135 @@
-# Welcome to your Lovable project
+# 🚀 Marklewis Mutugi — Developer Portfolio
 
-## Project info
+Welcome to the official repository of my developer portfolio!  
+A modern, sleek, and fully responsive personal website built using **Vite + React + TypeScript**, styled with **Tailwind CSS** and enhanced with **shadcn/ui** components.
 
-**URL**: https://lovable.dev/projects/17ad0f6e-7ec8-4d62-8271-ad73e281e1c6
+This portfolio is more than just a webpage — it's a complete showcase of my journey, skills, projects, and professional story as a passionate software engineer.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🔥 Features
 
-**Use Lovable**
+- 🎨 Beautiful UI/UX with **Dark/Light Mode Toggle**
+- 📱 Fully responsive across all devices
+- 📜 About Me & Career Journey Timeline
+- 🧠 Technical Skills Overview with Progress Bars
+- 🏆 Certifications Section
+- ✍️ Integrated Blog Highlights & Blog Section
+- 💼 Project Portfolio with:
+  - Rich Descriptions
+  - Live Demo Link
+  - GitHub Repository Link
+  - Stack Tags
+- 🎓 Education History Section
+- 🧭 Career Timeline
+- 💬 Testimonials Carousel
+- ⭐ Interactive Rating/Feedback Section
+- 📞 Contact Form with Validation
+- 📍 Embedded Google Maps Location (optional)
+- 📱 Floating WhatsApp Contact Icon
+- 🧩 Modular, Reusable Components
+- 🧪 SEO Meta Tags & Social Sharing Optimized
+- 📂 Organized Codebase & Folder Structure
+- 🌍 Social Media Integration
+- 📎 Resume Download Link
+- 📌 Sticky Navbar & Smooth Scrolling
+- 🔗 External Link Previews (with rich cards)
+- 🧠 Clean and maintainable TypeScript Codebase
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/17ad0f6e-7ec8-4d62-8271-ad73e281e1c6) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Tech Stack
 
-**Use your preferred IDE**
+- [Vite](https://vitejs.dev/) — lightning-fast dev server & build tool  
+- [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/) — for robust component logic  
+- [Tailwind CSS](https://tailwindcss.com/) — utility-first styling  
+- [shadcn/ui](https://ui.shadcn.com/) — elegant and accessible UI components  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📦 Prerequisites
 
-Follow these steps:
+Make sure you have **Node.js** and **npm** installed.  
+We recommend installing them using **[nvm](https://github.com/nvm-sh/nvm)**:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
+# Install nvm (if not installed)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Install latest LTS version of Node.js
+nvm install --lts
+
+# Verify installations
+node -v
+npm -v
+```
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### Step 1: Clone the repository
+
+```bash
 git clone <YOUR_GIT_URL>
+```
 
-# Step 2: Navigate to the project directory.
+### Step 2: Navigate to the project folder
+
+```bash
 cd <YOUR_PROJECT_NAME>
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Step 3: Install dependencies
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
+```
+
+### Step 4: Run the development server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at [http://localhost:5173](http://localhost:5173)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 📸 Screenshots
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+_Add some clean UI screenshots here to showcase sections like Projects, Blogs, Testimonials, and Contact._
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🌐 Live Demo
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+👉 [Visit My Live Portfolio](https://marklewis-verse-folio.vercel.app/)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/17ad0f6e-7ec8-4d62-8271-ad73e281e1c6) and click on Share -> Publish.
+## 📬 Contact
 
-## Can I connect a custom domain to my Lovable project?
+Have feedback or opportunities? Let’s talk!  
+📧 Email: your-email@example.com  
+💬 WhatsApp: [wa.me/your-number](https://wa.me/254790767347)  
+🌍 LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/marklewis-ngondi)  
+🐙 GitHub: [github.com/your-username](https://github.com/lewiii254)
 
-Yes it is!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📝 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+### 💡 Inspiration
+
+This portfolio was crafted to reflect my passion for software development, clean design, and user-focused experiences. Hope it inspires you too!
+
+---
+
+Made with ❤️ by **Marklewis Mutugi**
