@@ -17,10 +17,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <p className="font-heading font-bold text-xl">
-              <span className="text-gradient">Mark.Lewis</span>
+              <span className="text-gradient">Lewiii Thee G</span>
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              Creating digital experiences that inspire
+              Creating digital experiences that inspire. <br />
+              Passionate about clean code, user-focused design, and impact-driven tech <br />
+              Built by Marklewis Mutugi | Software Engineer & Startup Enthusiast 🚀
             </p>
           </div>
           
@@ -41,7 +43,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t mt-8 pt-6 text-center text-sm text-muted-foreground">
-          <p>&copy; {year} Marklewis Mutugi. All rights reserved.</p>
+          <p>&copy; {year} Marklewis Mutugi✨. All rights reserved.</p>
         </div>
       </div>
     </footer>
