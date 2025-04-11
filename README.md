@@ -116,7 +116,7 @@ The site will be available at [http://localhost:5173](http://localhost:5173)
 ## 📬 Contact
 
 Have feedback or opportunities? Let’s talk!  
-📧 Email: your-email@example.com  
+📧 Email: ngondimarklewis@gmail.com 
 💬 WhatsApp: [wa.me/your-number](https://wa.me/254790767347)  
 🌍 LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/marklewis-ngondi)  
 🐙 GitHub: [github.com/your-username](https://github.com/lewiii254)
