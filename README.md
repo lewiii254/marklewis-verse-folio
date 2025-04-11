@@ -100,7 +100,10 @@ The site will be available at [http://localhost:5173](http://localhost:5173)
 
 ## 📸 Screenshots
 
-_Add some clean UI screenshots here to showcase sections like Projects, Blogs, Testimonials, and Contact._
+![image](https://github.com/user-attachments/assets/8c936bdb-e0ae-4755-adc9-6aaa149a170e)
+![image](https://github.com/user-attachments/assets/56e441b7-b554-4890-b67d-975f4f66650c)
+![image](https://github.com/user-attachments/assets/9f5e7696-50ac-4dea-ad55-e5770af5d5b1)
+![image](https://github.com/user-attachments/assets/91802ecd-34dc-4df0-8025-ab261a7aa283)
 
 ---
 
