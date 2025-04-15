@@ -45,8 +45,8 @@ const ProjectsSection = () => {
               description="An intelligent plant health assistant powered by AI for real-time crop diagnostics and care. Includes image-based disease detection, expert treatment recommendations, and interactive insights to help farmers make informed, data-driven decisions. 🌿📊"
               imageSrc="/Agri.png"
               tags={["React", "Supabase", "Material UI", "AI & ML", "PostgreSQL"]}
-              liveDemoUrl="https://preview--shamba-smart-scan.lovable.app/"
-              githubUrl="https://preview--shamba-smart-scan.lovable.app/"
+              liveDemoUrl="https://shamba-smart-scan.vercel.app/"
+              githubUrl="https://github.com/lewiii254/shamba-smart-scan.git"
             />
           </ScrollReveal>
         </div>
