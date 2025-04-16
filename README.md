@@ -116,10 +116,13 @@ The site will be available at [http://localhost:5173](http://localhost:5173)
 ## 📬 Contact
 
 Have feedback or opportunities? Let’s talk!  
-[📧 Email:](ngondimarklewis@gmail.com) 
-[💬 WhatsApp:](https://wa.me/254790767347)  
-[🌍 LinkedIn:](https://linkedin.com/in/marklewis-ngondi)  
-[🐙 GitHub:](https://github.com/lewiii254)
+#### [📧 Email:](ngondimarklewis@gmail.com) 
+
+#### [💬 WhatsApp:](https://wa.me/254790767347)  
+
+#### [🌍 LinkedIn:](https://linkedin.com/in/marklewis-ngondi)  
+
+#### [🐙 GitHub:](https://github.com/lewiii254)
 
 ---
 
