@@ -119,7 +119,7 @@ Have feedback or opportunities? Let’s talk!
 [📧 Email:](ngondimarklewis@gmail.com) 
 [💬 WhatsApp:](https://wa.me/254790767347)  
 [🌍 LinkedIn:](https://linkedin.com/in/marklewis-ngondi)  
-🐙 GitHub: [github.com/your-username](https://github.com/lewiii254)
+[🐙 GitHub:](https://github.com/lewiii254)
 
 ---
 
