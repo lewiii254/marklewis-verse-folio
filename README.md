@@ -1,4 +1,4 @@
-# 🚀 Marklewis Mutugi — Developer Portfolio
+# 🚀 Marklewis Mutugi — Developer Portfolio✨😁
 
 Welcome to the official repository of my developer portfolio!  
 A modern, sleek, and fully responsive personal website built using **Vite + React + TypeScript**, styled with **Tailwind CSS** and enhanced with **shadcn/ui** components.
