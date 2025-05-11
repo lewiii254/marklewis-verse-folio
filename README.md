@@ -79,7 +79,7 @@ git clone https://github.com/lewiii254/marklewis-verse-folio.git
 ### Step 2: Navigate to the project folder
 
 ```bash
-cd <YOUR_PROJECT_NAME>
+cd marklewis-verse-folio
 ```
 
 ### Step 3: Install dependencies
