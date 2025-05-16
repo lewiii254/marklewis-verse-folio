@@ -8,6 +8,7 @@ import ChatMessage, { ChatMessageProps } from "./ChatMessage";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface ChatWidgetProps {
   isOpen: boolean;
@@ -95,12 +96,15 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DrawerContent className={cn(
-        "h-[70vh] sm:h-[600px] max-w-md mx-auto rounded-t-xl",
-        isMobile ? "w-full" : "w-[400px] fixed bottom-0 left-4 sm:left-6"
-      )}>
+      <DrawerContent 
+        className={cn(
+          "h-[70vh] sm:h-[600px] max-w-md mx-auto rounded-t-xl",
+          isMobile ? "w-full" : "w-[400px] fixed bottom-0 left-4 sm:left-6"
+        )}
+        aria-labelledby="chat-title"
+      >
         <div className="flex flex-col h-full">
-          {/* Chat header */}
+          {/* Chat header with accessible title */}
           <div className="p-4 border-b flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="relative">
@@ -110,14 +114,23 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
                 <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-background"></span>
               </div>
               <div>
-                <h3 className="font-medium">Marklewis Mutugi</h3>
+                <h3 className="font-medium" id="chat-title">Marklewis Mutugi</h3>
                 <p className="text-xs text-muted-foreground">Usually replies within an hour</p>
               </div>
             </div>
           </div>
           
+          {/* Add visually hidden description for screen readers */}
+          <VisuallyHidden>
+            <p id="chat-description">Chat with Marklewis Mutugi. Type your message in the input field below.</p>
+          </VisuallyHidden>
+          
           {/* Chat messages */}
-          <div className="flex-1 overflow-y-auto p-4">
+          <div 
+            className="flex-1 overflow-y-auto p-4"
+            aria-live="polite"
+            aria-relevant="additions"
+          >
             {messages.map((message, index) => (
               <ChatMessage key={index} {...message} />
             ))}
@@ -133,11 +146,13 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
                 placeholder="Type your message..."
                 disabled={isSending}
                 className="flex-1"
+                aria-label="Message input"
               />
               <Button 
                 type="submit" 
                 size="icon" 
                 disabled={isSending || !newMessage.trim()}
+                aria-label="Send message"
               >
                 <Send className="h-5 w-5" />
               </Button>
