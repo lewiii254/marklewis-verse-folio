@@ -2,10 +2,12 @@
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMounted, setIsMounted] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsMounted(true);
@@ -28,36 +30,36 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-32">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          <div className="md:col-span-7 space-y-6">
+    <section id="home" className="pt-24 pb-16 md:pt-32 md:pb-24">
+      <div className="container px-4 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+          <div className="md:col-span-7 space-y-4 md:space-y-6 text-center md:text-left">
             <ScrollReveal delay={200} direction="left">
-              <div className="inline-block glass px-4 py-2 rounded-full mb-2 text-sm">
+              <div className="inline-block glass px-3 py-1.5 rounded-full mb-2 text-xs sm:text-sm">
                 <span className="text-primary">✦</span> UI/UX Designer & Software Developer <span className="ml-1">🚀</span>
               </div>
             </ScrollReveal>
             
             <ScrollReveal delay={400} direction="left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Hi, I'm <span className="text-gradient">Marklewis Mutugi</span> <span className="inline-block animate-bounce">👋</span>
               </h1>
             </ScrollReveal>
             
             <ScrollReveal delay={600} direction="left">
-              <p className="text-xl text-muted-foreground">
+              <p className="text-base md:text-xl text-muted-foreground">
               I craft intuitive digital solutions that connect real user needs with impactful innovation. With a blend of UI/UX design and full-stack development, I bring bold ideas to life — one line of code at a time. 🚀 <span className="text-primary">✨</span>
               </p>
             </ScrollReveal>
             
             <ScrollReveal delay={800} direction="left">
-              <div className="pt-2 flex flex-wrap gap-4">
-                <Button size="lg" asChild>
+              <div className="pt-2 flex flex-wrap justify-center md:justify-start gap-3 md:gap-4">
+                <Button size={isMobile ? "default" : "lg"} asChild>
                   <a href="#contact">
                     Get in touch <span className="ml-1">📩</span>
                   </a>
                 </Button>
-                <Button variant="outline" size="lg" asChild>
+                <Button variant="outline" size={isMobile ? "default" : "lg"} asChild>
                   <a href="#projects">
                     View my work <span className="ml-1">👀</span>
                   </a>
@@ -67,7 +69,7 @@ const HeroSection = () => {
           </div>
           
           <ScrollReveal delay={1000} direction="right" className="md:col-span-5">
-            <div className="relative w-full max-w-[400px] mx-auto h-[400px]">
+            <div className="relative w-full max-w-[300px] md:max-w-[400px] mx-auto h-[300px] md:h-[400px]">
               {/* Enhanced animated fluid/watery background effect */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse-slow"></div>
@@ -105,9 +107,9 @@ const HeroSection = () => {
               {/* Profile image with parallax effect - ensuring it's visible with z-index and size adjustments */}
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div 
-                  className="w-[300px] h-[300px] relative"
+                  className="w-[230px] h-[230px] md:w-[300px] md:h-[300px] relative"
                   style={{
-                    transform: isMounted ? `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -0.8}px)` : 'none',
+                    transform: isMounted && !isMobile ? `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -0.8}px)` : 'none',
                     transition: 'transform 0.1s ease-out'
                   }}
                 >

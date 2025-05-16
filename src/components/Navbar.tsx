@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { Menu, X, Code, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,15 +36,28 @@ const Navbar = () => {
       }
     };
     
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     // Call once to set initial active section
     handleScroll();
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu when clicking a link on mobile
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  // Close menu when window is resized to desktop size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMenuOpen]);
 
   const navLinks = [
     { name: "Home", href: "/#home" },
@@ -60,24 +75,25 @@ const Navbar = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? "py-3 bg-background/80 backdrop-blur-lg shadow-sm" 
-          : "py-5 bg-transparent"
+          ? "py-2 bg-background/80 backdrop-blur-lg shadow-sm" 
+          : "py-3 bg-transparent"
       }`}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between px-4 mx-auto max-w-[1400px]">
         <Link 
           to="/" 
-          className="font-heading text-xl font-bold flex items-center gap-2"
+          className="font-heading text-lg sm:text-xl font-bold flex items-center gap-2"
+          onClick={closeMenu}
         >
           {/* Improved logo with better color contrast for both light and dark modes */}
           <div className="relative flex items-center">
             <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-400 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
-            <div className="relative flex items-center justify-center w-10 h-10 bg-background rounded-lg ring-1 ring-gray-400/50 dark:ring-white/50 overflow-hidden">
-              <Code className="text-primary w-6 h-6 z-10" />
-              <Sparkles className="absolute text-primary/90 w-8 h-8 animate-pulse-slow" />
+            <div className="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-background rounded-lg ring-1 ring-gray-400/50 dark:ring-white/50 overflow-hidden">
+              <Code className="text-primary w-5 h-5 sm:w-6 sm:h-6 z-10" />
+              <Sparkles className="absolute text-primary/90 w-6 h-6 sm:w-8 sm:h-8 animate-pulse-slow" />
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/40 to-purple-500/40 animate-pulse"></div>
             </div>
-            <span className="ml-2 font-extrabold tracking-tight">
+            <span className="ml-2 font-extrabold tracking-tight text-sm sm:text-base">
               <span className="text-foreground bg-clip-text">Mark</span>
               <span className="text-foreground bg-clip-text">Lewis</span>
             </span>
@@ -85,8 +101,8 @@ const Navbar = () => {
         </Link>
         
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-8">
+          <ul className="flex items-center gap-3 lg:gap-6">
             {navLinks.map((link) => {
               const isActive = 
                 (link.href === "/#home" && activeSection === "home") ||
@@ -136,24 +152,29 @@ const Navbar = () => {
           <ThemeSwitcher />
           <Button 
             variant="ghost" 
-            size="icon" 
+            size="sm" 
             onClick={toggleMenu}
-            className="md:hidden"
+            className="md:hidden p-1"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X /> : <Menu />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </Button>
         </div>
       </div>
       
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Improved for better mobile experience */}
       <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-md transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? "max-h-[500px] py-5" : "max-h-0"
+        className={`md:hidden fixed top-[52px] left-0 right-0 bg-background/95 backdrop-blur-lg shadow-md transition-all duration-300 z-50 ${
+          isMenuOpen ? "max-h-[80vh] overflow-y-auto" : "max-h-0 overflow-hidden"
         }`}
+        style={{ 
+          boxShadow: isMenuOpen ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
+          visibility: isMenuOpen ? 'visible' : 'hidden',
+          opacity: isMenuOpen ? 1 : 0
+        }}
       >
-        <nav className="container">
-          <ul className="flex flex-col gap-4">
+        <nav className="container py-4">
+          <ul className="flex flex-col gap-1">
             {navLinks.map((link) => {
               const isActive = 
                 (link.href === "/#home" && activeSection === "home") ||
@@ -171,8 +192,8 @@ const Navbar = () => {
                   {link.href.startsWith('/') && !link.href.includes('#') ? (
                     <Link 
                       to={link.href} 
-                      className={`block py-2 hover:pl-2 transition-all ${
-                        isActive ? "text-foreground font-medium" : "text-foreground/80 hover:text-foreground"
+                      className={`block py-3 px-4 rounded-lg transition-all ${
+                        isActive ? "bg-primary/10 text-foreground font-medium" : "text-foreground/80 hover:bg-background hover:text-foreground"
                       }`}
                       onClick={closeMenu}
                     >
@@ -181,8 +202,8 @@ const Navbar = () => {
                   ) : (
                     <a 
                       href={link.href} 
-                      className={`block py-2 hover:pl-2 transition-all ${
-                        isActive ? "text-foreground font-medium" : "text-foreground/80 hover:text-foreground"
+                      className={`block py-3 px-4 rounded-lg transition-all ${
+                        isActive ? "bg-primary/10 text-foreground font-medium" : "text-foreground/80 hover:bg-background hover:text-foreground"
                       }`}
                       onClick={closeMenu}
                     >

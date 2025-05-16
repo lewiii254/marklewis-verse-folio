@@ -55,12 +55,11 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Fix: Add IDs to section wrappers that match the navbar links
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen w-full overflow-hidden">
       <Navbar />
       
-      <main className="flex-1">
+      <main className="flex-1 w-full">
         <HeroSection />
         <AboutSection />
         <CareerSection />
@@ -75,18 +74,18 @@ const Index = () => {
       
       <Footer />
       
-      {/* Scroll to top button */}
+      {/* Scroll to top button - improved positioning for mobile */}
       <button
         onClick={scrollToTop}
-        className={`fixed right-6 bottom-24 p-3 rounded-full bg-primary text-white shadow-lg transition-all ${
+        className={`fixed right-4 sm:right-6 bottom-20 sm:bottom-24 p-2 sm:p-3 rounded-full bg-primary text-white shadow-lg transition-all z-40 ${
           showScrollTop ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
         }`}
         aria-label="Scroll to top"
       >
-        <ChevronUp size={20} />
+        <ChevronUp size={18} />
       </button>
       
-      {/* WhatsApp Button */}
+      {/* WhatsApp Button - improved positioning for mobile */}
       <WhatsAppButton 
         phoneNumber="254790767347" 
         message="Hi Marklewis👋! I saw your amazing✨ portfolio and I'm interested in working together🤝 on a project. When would be a good time to chat?"
