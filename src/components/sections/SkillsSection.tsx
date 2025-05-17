@@ -29,7 +29,6 @@ import {
   Workflow
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import SkillsNetwork from "@/components/SkillsNetwork";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 
@@ -141,11 +140,6 @@ const SkillsSection = () => {
     }
   ];
 
-  // Combined skills for the network visualization
-  const allSkills = skillCategories.flatMap(category => 
-    category.skills.map(skill => ({ ...skill }))
-  );
-
   return (
     <section id="skills" className="py-16 bg-secondary/50">
       <div className="container px-4 mx-auto">
@@ -155,12 +149,6 @@ const SkillsSection = () => {
             subtitle="My technical toolkit for building exceptional digital experiences 🛠️"
           />
         </ScrollReveal>
-        
-        <div className="mb-12">
-          <ScrollReveal delay={300}>
-            <SkillsNetwork skills={allSkills} />
-          </ScrollReveal>
-        </div>
         
         <ScrollReveal delay={400}>
           <Tabs defaultValue="frontend" className="w-full">
