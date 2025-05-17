@@ -11,6 +11,8 @@ This portfolio is more than just a webpage — it's a complete showcase of my jo
 
 - 🎨 Beautiful UI/UX with **Dark/Light Mode Toggle**
 - 📱 Fully responsive across all devices
+-  A Chat Section With Several sections😁😁😁😁😁😁😁😁
+-  Gifs 
 - 📜 About Me & Career Journey Timeline
 - 🧠 Technical Skills Overview with Progress Bars
 - 🏆 Certifications Section
