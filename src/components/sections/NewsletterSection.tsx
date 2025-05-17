@@ -8,7 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
-import { Newsletter } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -54,7 +54,7 @@ const NewsletterSection = () => {
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Newsletter className="h-6 w-6 text-primary" />
+                <Mail className="h-6 w-6 text-primary" />
               </div>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Stay Updated</h2>
