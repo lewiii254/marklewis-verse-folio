@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark"); // Default to dark
@@ -61,20 +61,51 @@ const ThemeSwitcher = () => {
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       <div className="relative w-full h-full flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={theme}
+            initial={{ 
+              opacity: 0, 
+              rotate: theme === "light" ? 45 : -45,
+              scale: 0.2
+            }}
+            animate={{ 
+              opacity: 1, 
+              rotate: 0,
+              scale: 1
+            }}
+            exit={{ 
+              opacity: 0, 
+              rotate: theme === "light" ? -45 : 45,
+              scale: 0.2
+            }}
+            transition={{
+              duration: 0.5,
+              type: "spring",
+              stiffness: 200,
+              damping: 10
+            }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            {theme === "light" ? (
+              <Moon className="h-[1.2rem] w-[1.2rem]" />
+            ) : (
+              <Sun className="h-[1.2rem] w-[1.2rem]" />
+            )}
+          </motion.div>
+        </AnimatePresence>
+        
+        {/* Background animation */}
         <motion.div
-          initial={{ opacity: 0, y: theme === "light" ? 20 : -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: theme === "light" ? -20 : 20 }}
-          transition={{ duration: 0.5 }}
-          key={theme}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          {theme === "light" ? (
-            <Moon className="h-[1.2rem] w-[1.2rem]" />
-          ) : (
-            <Sun className="h-[1.2rem] w-[1.2rem] animate-pulse-slow" />
-          )}
-        </motion.div>
+          key={`${theme}-bg`}
+          className="absolute inset-0 rounded-full"
+          initial={{ scale: 0 }}
+          animate={{ 
+            scale: theme === "dark" ? [0, 20, 0] : [0, 20, 0],
+            backgroundColor: theme === "dark" ? "#8b5cf6" : "#fbbf24"
+          }}
+          transition={{ duration: 1.5 }}
+        />
       </div>
     </Button>
   );

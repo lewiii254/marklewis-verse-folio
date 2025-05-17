@@ -16,6 +16,7 @@ import BlogSection from '@/components/sections/BlogSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import ContactSection from '@/components/sections/ContactSection';
 import RatingSection from '@/components/sections/RatingSection';
+import NewsletterSection from '@/components/sections/NewsletterSection';
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -69,6 +70,7 @@ const Index = () => {
         <BlogSection />
         <TestimonialsSection />
         <ContactSection />
+        <NewsletterSection />
         <RatingSection />
       </main>
       

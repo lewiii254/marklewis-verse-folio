@@ -1,7 +1,6 @@
 
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
-import SkillsCarousel from "@/components/SkillsCarousel";
 import { 
   Code, 
   Database, 
@@ -19,6 +18,7 @@ import {
   Command
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SkillsNetwork from "@/components/SkillsNetwork";
 
 const SkillsSection = () => {
   const isMobile = useIsMobile();
@@ -56,7 +56,7 @@ const SkillsSection = () => {
         </ScrollReveal>
         
         <ScrollReveal delay={300}>
-          <SkillsCarousel skillsData={skillsData} />
+          <SkillsNetwork skills={skillsData} />
         </ScrollReveal>
       </div>
     </section>
