@@ -23,7 +23,6 @@ type ConversationStep = {
     nextId: string;
   }[];
   inputRequired?: boolean;
-  collectEmail?: boolean;
   onInput?: (input: string) => string | null;
   gif?: string;
 };
@@ -54,48 +53,6 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
     inputRequired: true,
     onInput: (name) => {
       if (name.trim()) {
-        return "ask-email";
-      }
-      return null;
-    }
-  },
-  "ask-email": {
-    id: "ask-email",
-    messages: [
-      {
-        content: "Can I have your email as well?",
-        timestamp: new Date(),
-        sender: "admin",
-        status: "read",
-      }
-    ],
-    inputRequired: true,
-    collectEmail: true,
-    onInput: (email) => {
-      // Simple email validation
-      if (email.includes("@") && email.includes(".")) {
-        return "profile-created";
-      } else if (email.toLowerCase() === "naah" || email.toLowerCase() === "no") {
-        return "ask-email-again";
-      }
-      return null;
-    }
-  },
-  "ask-email-again": {
-    id: "ask-email-again",
-    messages: [
-      {
-        content: "Can I have your email as well?",
-        timestamp: new Date(),
-        sender: "admin",
-        status: "read",
-      }
-    ],
-    inputRequired: true,
-    collectEmail: true,
-    onInput: (email) => {
-      // Simple email validation
-      if (email.includes("@") && email.includes(".")) {
         return "profile-created";
       }
       return null;
@@ -105,7 +62,7 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
     id: "profile-created",
     messages: [
       {
-        content: "Your digital profile has been successfully created. Hope you feel right at home. 🤗",
+        content: "Great to meet you! I hope you feel right at home. 🤗",
         timestamp: new Date(),
         sender: "admin",
         status: "read",
@@ -207,10 +164,67 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         timestamp: new Date(),
         sender: "admin",
         status: "read",
+      },
+      {
+        content: "What else would you like to know about him?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
       }
     ],
     options: [
+      { text: "His Hobbies", nextId: "hobbies" },
+      { text: "His Aspirations", nextId: "aspirations" },
       { text: "Go Back ↩", nextId: "story-mode" },
+    ]
+  },
+  "hobbies": {
+    id: "hobbies",
+    messages: [
+      {
+        content: "Outside of coding and design, Marklewis enjoys photography, reading tech blogs, and experimenting with new gadgets. He's also passionate about fitness and occasionally goes hiking to disconnect and recharge.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Tell me more", nextId: "hobbies-more" },
+      { text: "Go Back ↩", nextId: "general-life-more" },
+    ]
+  },
+  "hobbies-more": {
+    id: "hobbies-more",
+    messages: [
+      {
+        content: "Marklewis is also interested in digital minimalism and finding ways technology can enhance rather than distract from meaningful experiences. He enjoys attending tech meetups and conferences to network with like-minded professionals.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "general-life-more" },
+    ]
+  },
+  "aspirations": {
+    id: "aspirations",
+    messages: [
+      {
+        content: "Marklewis aspires to create technology that makes a positive impact on people's lives. He's passionate about building accessible, user-friendly applications that solve real problems.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "Long term, he hopes to mentor upcoming developers and contribute to open-source projects that benefit the wider tech community.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "general-life-more" },
     ]
   },
   "professional-life": {
@@ -265,10 +279,46 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         timestamp: new Date(),
         sender: "admin",
         status: "read",
+      },
+      {
+        content: "What specific aspect of UI/UX design interests you most?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
       }
     ],
     options: [
+      { text: "Design Process", nextId: "design-process" },
+      { text: "Tools & Technologies", nextId: "design-tools" },
       { text: "Go Back ↩", nextId: "choose-tech" },
+    ]
+  },
+  "design-process": {
+    id: "design-process",
+    messages: [
+      {
+        content: "Marklewis follows a user-centered design process that begins with research and understanding user needs. He creates personas, user flows, and wireframes before moving to high-fidelity designs. He believes in iterative design with regular user testing to refine the experience.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "uiux-design" },
+    ]
+  },
+  "design-tools": {
+    id: "design-tools",
+    messages: [
+      {
+        content: "For UI/UX design, Marklewis primarily uses Figma for collaborative design work. He's also proficient with Adobe XD, Sketch, and prototyping tools like ProtoPie. For user research and testing, he works with tools like Hotjar and UserTesting.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "uiux-design" },
     ]
   },
   "web-development": {
@@ -279,10 +329,46 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         timestamp: new Date(),
         sender: "admin",
         status: "read",
+      },
+      {
+        content: "What aspect of web development would you like to know more about?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
       }
     ],
     options: [
+      { text: "Frontend Technologies", nextId: "frontend-tech" },
+      { text: "Development Philosophy", nextId: "dev-philosophy" },
       { text: "Go Back ↩", nextId: "choose-tech" },
+    ]
+  },
+  "frontend-tech": {
+    id: "frontend-tech",
+    messages: [
+      {
+        content: "Marklewis specializes in React.js ecosystem with TypeScript for type safety. He's experienced with state management solutions like Redux and Zustand, and styling approaches including Styled Components and Tailwind CSS. He stays current with modern build tools and performance optimization techniques.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "web-development" },
+    ]
+  },
+  "dev-philosophy": {
+    id: "dev-philosophy",
+    messages: [
+      {
+        content: "Marklewis believes in writing clean, maintainable code that solves real problems. He values accessibility and performance as core aspects of development, not afterthoughts. He approaches projects iteratively, focusing on delivering working software that can be continuously improved.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "web-development" },
     ]
   },
   "sdlc-management": {
@@ -293,10 +379,46 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         timestamp: new Date(),
         sender: "admin",
         status: "read",
+      },
+      {
+        content: "What would you like to know more about?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
       }
     ],
     options: [
+      { text: "Project Management", nextId: "project-management" },
+      { text: "CI/CD Practices", nextId: "cicd-practices" },
       { text: "Go Back ↩", nextId: "choose-tech" },
+    ]
+  },
+  "project-management": {
+    id: "project-management",
+    messages: [
+      {
+        content: "Marklewis has experience with agile project management, particularly Scrum and Kanban methodologies. He's comfortable working with tools like Jira and Trello for task tracking and appreciates the importance of clear communication in team settings.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "sdlc-management" },
+    ]
+  },
+  "cicd-practices": {
+    id: "cicd-practices",
+    messages: [
+      {
+        content: "Marklewis implements continuous integration and deployment practices using tools like GitHub Actions and Jenkins. He values automated testing and believes in building robust pipelines that maintain code quality while enabling fast, reliable deployments.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Go Back ↩", nextId: "sdlc-management" },
     ]
   },
   "sandbox-mode": {
@@ -322,7 +444,50 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         status: "read",
       },
       {
-        content: "Would you like to explore another mode?",
+        content: "What else would you like to know about his work or skills?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Ask About Projects", nextId: "ask-projects" },
+      { text: "Ask About Skills", nextId: "ask-skills" },
+      { text: "Return to Menu", nextId: "profile-created" },
+    ]
+  },
+  "ask-projects": {
+    id: "ask-projects",
+    messages: [
+      {
+        content: "Marklewis has worked on various projects including responsive web applications, UI/UX redesigns, and interactive dashboards. His portfolio showcases his ability to combine aesthetic design with functional implementation.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "His most recent project involved creating an e-commerce platform with React, implementing state management with Redux, and integrating payment processing APIs.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Return to Menu", nextId: "profile-created" },
+      { text: "Ask Another Question", nextId: "sandbox-mode" },
+    ]
+  },
+  "ask-skills": {
+    id: "ask-skills",
+    messages: [
+      {
+        content: "Marklewis's technical skills include React.js, TypeScript, CSS/SCSS, Tailwind CSS, and various UI component libraries. He's proficient in version control with Git and familiar with CI/CD pipelines.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "In addition to technical skills, he possesses strong communication abilities, creative problem-solving, and an eye for design that helps him create intuitive user experiences.",
         timestamp: new Date(),
         sender: "admin",
         status: "read",
@@ -346,6 +511,7 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
     options: [
       { text: "Projects", nextId: "goto-projects" },
       { text: "Skills", nextId: "goto-skills" },
+      { text: "Blog", nextId: "goto-blog" },
       { text: "Contact", nextId: "goto-contact" },
       { text: "Go Back ↩", nextId: "profile-created" },
     ]
@@ -378,6 +544,20 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
       { text: "Return to Menu", nextId: "profile-created" },
     ]
   },
+  "goto-blog": {
+    id: "goto-blog",
+    messages: [
+      {
+        content: "Taking you to the blog section...",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Return to Menu", nextId: "profile-created" },
+    ]
+  },
   "goto-contact": {
     id: "goto-contact",
     messages: [
@@ -401,6 +581,9 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
         sender: "admin",
         status: "read",
       }
+    ],
+    options: [
+      { text: "Start New Chat", nextId: "start" },
     ]
   }
 };
@@ -412,7 +595,6 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
   const [currentStep, setCurrentStep] = useState("start");
   const [showOptions, setShowOptions] = useState(false);
   const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [showGif, setShowGif] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -475,6 +657,7 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
       if (projectsElement) {
         setTimeout(() => {
           projectsElement.scrollIntoView({ behavior: "smooth" });
+          onClose(); // Close the chat after navigation
         }, 1000);
       }
     } else if (nextStepId === "goto-skills") {
@@ -482,13 +665,19 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
       if (skillsElement) {
         setTimeout(() => {
           skillsElement.scrollIntoView({ behavior: "smooth" });
+          onClose(); // Close the chat after navigation
         }, 1000);
       }
+    } else if (nextStepId === "goto-blog") {
+      setTimeout(() => {
+        window.location.href = "/blog";
+      }, 1000);
     } else if (nextStepId === "goto-contact") {
       const contactElement = document.getElementById("contact-section");
       if (contactElement) {
         setTimeout(() => {
           contactElement.scrollIntoView({ behavior: "smooth" });
+          onClose(); // Close the chat after navigation
         }, 1000);
       }
     }
@@ -521,11 +710,10 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
       // Process user input based on current step
       const currentStepData = CONVERSATION_STEPS[currentStep];
       
-      // Store name or email if needed
+      // Store name if needed
       if (currentStep === "start") {
         setUserName(newMessage);
-      } else if (currentStepData.collectEmail) {
-        setUserEmail(newMessage);
+        toast.success(`Welcome, ${newMessage}!`);
       }
       
       // Get next step based on user input
@@ -591,7 +779,7 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
             
             {/* GIF display */}
             {showGif && (
-              <div className="flex justify-center my-4">
+              <div className="flex justify-center my-4 animate-fade-in">
                 <img 
                   src={showGif} 
                   alt="Chat Animation" 
@@ -602,13 +790,13 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
             
             {/* Chat options */}
             {showOptions && CONVERSATION_STEPS[currentStep].options && (
-              <div className="flex flex-col gap-2 mt-4">
+              <div className="flex flex-col gap-2 mt-4 animate-fade-in">
                 {CONVERSATION_STEPS[currentStep].options!.map((option, index) => (
                   <Button
                     key={index}
                     onClick={() => goToNextStep(option.nextId)}
                     variant="outline"
-                    className="justify-start"
+                    className="justify-start hover:bg-primary/10 transition-all"
                   >
                     {option.text} 
                     {!option.text.includes("Go Back") && <ArrowRight className="ml-auto" />}
