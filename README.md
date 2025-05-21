@@ -37,6 +37,7 @@ This portfolio is more than just a webpage — it's a complete showcase of my jo
 - 📌 Sticky Navbar & Smooth Scrolling
 - 🔗 External Link Previews (with rich cards)
 - 🧠 Clean and maintainable TypeScript Codebase
+- Added Pricing Info
 
 ---
 
