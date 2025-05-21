@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,6 +77,7 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
       { text: "Story Mode", nextId: "story-mode" },
       { text: "Sandbox Mode", nextId: "sandbox-mode" },
       { text: "Action Mode", nextId: "action-mode" },
+      { text: "Website Pricing", nextId: "pricing-mode" },
       { text: "End Conversation", nextId: "end-conversation" },
     ]
   },
@@ -572,11 +572,175 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
       { text: "Return to Menu", nextId: "profile-created" },
     ]
   },
+  "pricing-mode": {
+    id: "pricing-mode",
+    messages: [
+      {
+        content: "You're interested in website pricing? Great! Marklewis offers various website solutions at competitive rates in Kenyan Shillings (KES).",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "What type of website are you looking for?",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      }
+    ],
+    options: [
+      { text: "Personal Portfolio", nextId: "price-portfolio" },
+      { text: "Business Website", nextId: "price-business" },
+      { text: "E-commerce Store", nextId: "price-ecommerce" },
+      { text: "Custom Web Application", nextId: "price-webapp" },
+      { text: "Go Back ↩", nextId: "profile-created" },
+    ]
+  },
+  "price-portfolio": {
+    id: "price-portfolio",
+    messages: [
+      {
+        content: "For a professional personal portfolio website:",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "• Basic Portfolio: KES 20,000 - 35,000\n• Advanced Portfolio (with blog): KES 40,000 - 60,000\n• Premium Portfolio (with advanced features): KES 65,000 - 90,000",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "All portfolio packages include responsive design, SEO optimization, and 3 months of free maintenance.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+    ],
+    options: [
+      { text: "View Other Pricing", nextId: "pricing-mode" },
+      { text: "Contact About This", nextId: "contact-pricing" },
+      { text: "Main Menu", nextId: "profile-created" },
+    ]
+  },
+  "price-business": {
+    id: "price-business",
+    messages: [
+      {
+        content: "For business websites:",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "• Starter Business Site: KES 45,000 - 70,000\n• Professional Business Site: KES 75,000 - 120,000\n• Enterprise Business Solution: KES 130,000 - 200,000+",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "Business websites include multiple pages, contact forms, Google Maps integration, analytics, and responsive design optimized for all devices.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+    ],
+    options: [
+      { text: "View Other Pricing", nextId: "pricing-mode" },
+      { text: "Contact About This", nextId: "contact-pricing" },
+      { text: "Main Menu", nextId: "profile-created" },
+    ]
+  },
+  "price-ecommerce": {
+    id: "price-ecommerce",
+    messages: [
+      {
+        content: "For e-commerce websites:",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "• Basic Online Store (up to 50 products): KES 80,000 - 120,000\n• Standard Online Store (up to 500 products): KES 130,000 - 180,000\n• Advanced E-commerce Platform: KES 200,000 - 350,000+",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "E-commerce sites include product management, shopping cart, secure payment gateways (including M-Pesa integration), inventory management, and order tracking.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+    ],
+    options: [
+      { text: "View Other Pricing", nextId: "pricing-mode" },
+      { text: "Contact About This", nextId: "contact-pricing" },
+      { text: "Main Menu", nextId: "profile-created" },
+    ]
+  },
+  "price-webapp": {
+    id: "price-webapp",
+    messages: [
+      {
+        content: "For custom web applications:",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "• Basic Web App: KES 150,000 - 250,000\n• Advanced Web Application: KES 300,000 - 500,000\n• Enterprise Solutions: KES 600,000+",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "Custom web applications are priced based on complexity, features required, and timeline. All include thorough requirements analysis, custom development, testing, and deployment.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+    ],
+    options: [
+      { text: "View Other Pricing", nextId: "pricing-mode" },
+      { text: "Contact About This", nextId: "contact-pricing" },
+      { text: "Main Menu", nextId: "profile-created" },
+    ]
+  },
+  "contact-pricing": {
+    id: "contact-pricing",
+    messages: [
+      {
+        content: "Interested in discussing pricing further? Great choice!",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "Marklewis offers personalized quotes based on your specific requirements. Each project is unique and may require different features and timelines.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+      {
+        content: "I can help you get in touch directly to discuss your project needs in detail.",
+        timestamp: new Date(),
+        sender: "admin",
+        status: "read",
+      },
+    ],
+    options: [
+      { text: "Contact Now", nextId: "goto-contact" },
+      { text: "Return to Pricing", nextId: "pricing-mode" },
+      { text: "Main Menu", nextId: "profile-created" },
+    ]
+  },
   "end-conversation": {
     id: "end-conversation",
     messages: [
       {
-        content: "Thank you for chatting! Feel free to reach out again if you have any questions about Marklewis's work or skills. Have a great day!",
+        content: "Thank you for chatting! Feel free to reach out again if you have any questions about Marklewis's work, skills or pricing. Have a great day!",
         timestamp: new Date(),
         sender: "admin",
         status: "read",
