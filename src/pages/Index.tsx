@@ -117,10 +117,11 @@ const Index = () => {
   };
 
   // Customize ScrollArea options based on device
+  // Fix: Use proper type literal instead of string variable
   const scrollAreaProps = {
     className: "h-screen w-full",
     // Use simpler scroll behavior on low-end devices
-    type: lowEndDevice ? "auto" : "hover"
+    type: lowEndDevice ? "auto" as const : "hover" as const
   };
 
   return (
