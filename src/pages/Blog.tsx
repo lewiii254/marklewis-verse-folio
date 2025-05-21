@@ -1,53 +1,40 @@
 
+import { useState } from 'react';
+import { Link } from "react-router-dom";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SectionHeading from '@/components/SectionHeading';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-
-// Sample blog post data (in a real app, this would come from an API or CMS)
-const blogPosts = [
-  {
-    id: 1,
-    title: 'The Evolution of UI/UX Design Trends in 2024',
-    excerpt: 'Explore the latest design trends shaping the digital landscape this year, from neumorphism to glassmorphism and beyond.',
-    date: 'April 2, 2024',
-    category: 'Design',
-    readTime: '5 min read',
-    image: '/uiux.jpeg'
-  },
-  {
-    id: 2,
-    title: 'Building Performant React Applications',
-    excerpt: 'Learn how to optimize your React applications for better performance, from code splitting to memoization techniques.',
-    date: 'March 15, 2024',
-    category: 'Development',
-    readTime: '8 min read',
-    image: '/react.jpeg'
-  },
-  {
-    id: 3,
-    title: 'The Power of Design Systems in Product Development',
-    excerpt: 'How design systems can streamline your workflow, improve consistency, and enhance collaboration between designers and developers.',
-    date: 'February 28, 2024',
-    category: 'Design',
-    readTime: '6 min read',
-    image: '/DesignSystem.jpeg'
-  },
-  {
-    id: 4,
-    title: 'From Concept to Launch: My Latest Project Journey',
-    excerpt: 'A behind-the-scenes look at the process of building a modern web application from initial concept to final deployment.',
-    date: 'February 10, 2024',
-    category: 'Case Study',
-    readTime: '10 min read',
-    image: '/SDLC.jpeg'
-  }
-];
+import { ChevronLeft, Clock, Calendar, User, Book } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from '@/components/ui/pagination';
+import { blogPosts } from '@/data/blogData';
 
 const Blog = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 4;
+  
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+  
+  const handlePageChange = (pageNumber: number) => {
+    window.scrollTo(0, 0);
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -71,30 +58,58 @@ const Blog = () => {
               />
             </ScrollReveal>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-              {blogPosts.map((post, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-12">
+              {currentPosts.map((post, index) => (
                 <ScrollReveal 
                   key={post.id} 
                   delay={index * 100}
                   direction={index % 2 === 0 ? 'left' : 'right'}
                 >
-                  <article className="glass rounded-xl overflow-hidden hover-lift h-full flex flex-col">
-                    <img 
-                      src={post.image} 
-                      alt={post.title} 
-                      className="w-full h-48 object-cover"
-                    />
+                  <article className="glass rounded-xl overflow-hidden hover-lift h-full flex flex-col transition-all duration-300 hover:shadow-lg">
+                    <Link to={`/blog/${post.id}`} className="block overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                        className="w-full h-52 object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </Link>
                     <div className="p-6 flex-1 flex flex-col">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-primary">{post.category}</span>
-                        <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                        <Badge>{post.category}</Badge>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <Clock size={12} />
+                          <span>{post.readTime}</span>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold mb-3">{post.title}</h3>
-                      <p className="text-muted-foreground mb-4 flex-1">{post.excerpt}</p>
-                      <div className="flex justify-between items-center mt-auto">
-                        <span className="text-sm text-muted-foreground">{post.date}</span>
-                        <Button variant="ghost" size="sm" className="hover:text-primary">
-                          Read More
+                      
+                      <h3 className="text-xl font-bold mb-3 hover:text-primary transition-colors">
+                        <Link to={`/blog/${post.id}`} className="hover:underline underline-offset-4">
+                          {post.title}
+                        </Link>
+                      </h3>
+                      
+                      <p className="text-muted-foreground mb-4 flex-1 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {post.tags.map((tag, idx) => (
+                          <span 
+                            key={idx} 
+                            className="px-2 py-1 text-xs rounded-full bg-secondary/50 text-muted-foreground"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/30">
+                        <div className="flex items-center gap-2">
+                          <Calendar size={14} className="text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">{post.date}</span>
+                        </div>
+                        <Button variant="ghost" size="sm" className="hover:text-primary" asChild>
+                          <Link to={`/blog/${post.id}`}>Read More</Link>
                         </Button>
                       </div>
                     </div>
@@ -102,6 +117,38 @@ const Blog = () => {
                 </ScrollReveal>
               ))}
             </div>
+            
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <ScrollReveal delay={400}>
+                <Pagination className="mt-12">
+                  <PaginationContent>
+                    {currentPage > 1 && (
+                      <PaginationItem>
+                        <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
+                      </PaginationItem>
+                    )}
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          isActive={page === currentPage}
+                          onClick={() => handlePageChange(page)}
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    
+                    {currentPage < totalPages && (
+                      <PaginationItem>
+                        <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+                      </PaginationItem>
+                    )}
+                  </PaginationContent>
+                </Pagination>
+              </ScrollReveal>
+            )}
           </div>
         </section>
       </main>

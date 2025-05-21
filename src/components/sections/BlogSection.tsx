@@ -5,40 +5,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 import { ArrowRight, Clock, Calendar, User, Book } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { blogPosts } from "@/data/blogData";
 
 const BlogSection = () => {
-  const blogPosts = [
-    {
-      title: "The Evolution of UI/UX Design Trends in 2024",
-      excerpt: "Explore the latest design trends shaping the digital landscape this year, from neumorphism to glassmorphism and beyond. Learn how these trends can be applied to your projects.",
-      date: "April 2, 2024",
-      category: "Design",
-      readTime: "5 min read",
-      author: "Mark Lewis",
-      image: "/uiux.jpeg",
-      tags: ["UI/UX", "Design Trends", "Web Design"]
-    },
-    {
-      title: "Building Performant React Applications",
-      excerpt: "Learn how to optimize your React applications for better performance. From code splitting to memoization techniques, discover ways to make your app lightning fast.",
-      date: "March 15, 2024",
-      category: "Development",
-      readTime: "8 min read",
-      author: "Mark Lewis",
-      image: "/react.jpeg",
-      tags: ["React", "Performance", "JavaScript"]
-    },
-    {
-      title: "The Power of Design Systems in Product Development",
-      excerpt: "How design systems can streamline your workflow and improve consistency across your products. Discover the benefits of building and maintaining a robust design system.",
-      date: "February 28, 2024",
-      category: "Design",
-      readTime: "6 min read",
-      author: "Mark Lewis",
-      image: "/DesignSystem.jpeg",
-      tags: ["Design Systems", "Product Design", "Consistency"]
-    }
-  ];
+  // Just show the first 3 blog posts in the home page section
+  const featuredPosts = blogPosts.slice(0, 3);
 
   return (
     <section id="blog" className="py-20 bg-secondary/10">
@@ -51,15 +22,17 @@ const BlogSection = () => {
         </ScrollReveal>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <ScrollReveal key={index} delay={index * 100} direction="up">
+          {featuredPosts.map((post, index) => (
+            <ScrollReveal key={post.id} delay={index * 100} direction="up">
               <article className="glass rounded-xl overflow-hidden hover-lift h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                 <div className="relative">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-52 object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                  <Link to={`/blog/${post.id}`} className="block overflow-hidden">
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="w-full h-52 object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </Link>
                   <Badge className="absolute top-3 right-3 bg-primary/80 hover:bg-primary text-white">
                     {post.category}
                   </Badge>
@@ -79,7 +52,7 @@ const BlogSection = () => {
                   </div>
                   
                   <h3 className="text-xl font-bold mb-3 hover:text-primary transition-colors">
-                    <Link to="/blog" className="hover:underline underline-offset-4">
+                    <Link to={`/blog/${post.id}`} className="hover:underline underline-offset-4">
                       {post.title}
                     </Link>
                   </h3>
@@ -104,9 +77,11 @@ const BlogSection = () => {
                       <User size={14} className="text-primary" />
                       <span className="text-sm">{post.author}</span>
                     </div>
-                    <Button variant="ghost" size="sm" className="hover:text-primary flex items-center gap-1">
-                      Read More
-                      <ArrowRight size={14} />
+                    <Button variant="ghost" size="sm" className="hover:text-primary flex items-center gap-1" asChild>
+                      <Link to={`/blog/${post.id}`}>
+                        Read More
+                        <ArrowRight size={14} />
+                      </Link>
                     </Button>
                   </div>
                 </div>
