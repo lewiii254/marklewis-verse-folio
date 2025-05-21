@@ -23,7 +23,7 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
     if (!containerRef.current || !autoScrollEnabled) return;
     
     // Scroll faster on mobile devices
-    const scrollAmount = isMobile ? 1.2 : 0.8;
+    const scrollAmount = isMobile ? 1.0 : 0.8;
     containerRef.current.scrollLeft += scrollAmount;
     
     // Reset scroll position when reaching the end for infinite scroll feel
@@ -55,6 +55,16 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
     startAutoScroll();
   };
 
+  // Handle manual scrolling with touch
+  const handleTouchStart = () => {
+    pauseAutoScroll();
+  };
+
+  const handleTouchEnd = () => {
+    // Add slight delay before resuming autoscroll
+    setTimeout(resumeAutoScroll, 1500);
+  };
+
   // Start scrolling when in view
   useEffect(() => {
     if (inView && autoScrollEnabled && !animationRef.current) {
@@ -65,6 +75,15 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
       stopAutoScroll();
     };
   }, [inView, autoScrollEnabled, isMobile]);
+
+  // Ensure proper cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div ref={ref} className="relative w-full overflow-hidden">
@@ -83,8 +102,8 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
         }}
         onMouseEnter={pauseAutoScroll}
         onMouseLeave={resumeAutoScroll}
-        onTouchStart={pauseAutoScroll}
-        onTouchEnd={resumeAutoScroll}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Skills followed by duplicate skills for seamless loop */}
         {[...skillsData, ...skillsData.slice(0, 4)].map((skill, index) => (
@@ -95,7 +114,7 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
             <SkillCard 
               name={skill.name}
               icon={skill.icon}
-              className="w-[120px] min-w-[120px] sm:w-[150px] sm:min-w-[150px]"
+              className="w-[105px] min-w-[105px] sm:w-[150px] sm:min-w-[150px]"
             />
           </div>
         ))}

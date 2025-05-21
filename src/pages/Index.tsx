@@ -6,6 +6,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import { ChevronUp } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Import main sections directly
 import HeroSection from '@/components/sections/HeroSection';
@@ -24,12 +25,12 @@ const NewsletterSection = lazy(() => import('@/components/sections/NewsletterSec
 
 // Loading component for suspense fallback
 const SectionSkeleton = () => (
-  <div className="w-full py-16">
+  <div className="w-full py-8 sm:py-16">
     <Skeleton className="w-[80%] h-8 mx-auto mb-4" />
     <Skeleton className="w-[60%] h-6 mx-auto mb-8" />
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      <Skeleton className="h-[200px] w-full rounded-xl" />
-      <Skeleton className="h-[200px] w-full rounded-xl" />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
+      <Skeleton className="h-[150px] sm:h-[200px] w-full rounded-xl" />
+      <Skeleton className="h-[150px] sm:h-[200px] w-full rounded-xl" />
     </div>
   </div>
 );
@@ -37,6 +38,8 @@ const SectionSkeleton = () => (
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [lowEndDevice, setLowEndDevice] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Mark as loaded after a short delay to ensure smooth transitions
@@ -44,8 +47,35 @@ const Index = () => {
       setIsLoaded(true);
     }, 100);
     
+    // Check if device is low-end based on memory and processor
+    const checkDevicePerformance = () => {
+      // @ts-ignore - Some browsers support this API
+      if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+        setLowEndDevice(true);
+        return;
+      }
+      
+      // Using a simple time-based test as fallback
+      const start = performance.now();
+      let sum = 0;
+      for (let i = 0; i < 1000000; i++) {
+        sum += i;
+      }
+      const end = performance.now();
+      
+      // If the test takes more than 100ms, consider it a low-end device
+      if (end - start > 100) {
+        setLowEndDevice(true);
+      }
+    };
+    
+    checkDevicePerformance();
+    
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
+      // Use requestAnimationFrame for smoother scroll event handling
+      requestAnimationFrame(() => {
+        setShowScrollTop(window.scrollY > 300);
+      });
     };
     
     // Add hash change event to improve navigation
@@ -86,8 +116,15 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Customize ScrollArea options based on device
+  const scrollAreaProps = {
+    className: "h-screen w-full",
+    // Use simpler scroll behavior on low-end devices
+    type: lowEndDevice ? "auto" : "hover"
+  };
+
   return (
-    <ScrollArea className="h-screen w-full">
+    <ScrollArea {...scrollAreaProps}>
       <div className={`flex flex-col min-h-screen w-full overflow-hidden transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar />
         
@@ -139,15 +176,16 @@ const Index = () => {
         
         <Footer />
         
-        {/* Scroll to top button - improved animation */}
+        {/* Scroll to top button - improved animation and mobile touch target */}
         <button
           onClick={scrollToTop}
           className={`fixed right-4 sm:right-6 bottom-20 sm:bottom-24 p-2 sm:p-3 rounded-full bg-primary text-white shadow-lg transition-all duration-300 z-40 ${
             showScrollTop ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
           }`}
           aria-label="Scroll to top"
+          style={{ touchAction: 'manipulation' }}
         >
-          <ChevronUp size={18} />
+          <ChevronUp size={isMobile ? 22 : 18} />
         </button>
         
         {/* WhatsApp Button */}

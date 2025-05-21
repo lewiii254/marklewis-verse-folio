@@ -7,9 +7,10 @@ interface ScrollRevealProps {
   threshold?: number;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
-  duration?: number; // Added duration prop
-  once?: boolean; // Added once prop for performance
-  rootMargin?: string; // Added customizable rootMargin
+  duration?: number;
+  once?: boolean;
+  rootMargin?: string;
+  disabled?: boolean; // Add option to disable animations on low-end devices
 }
 
 const ScrollReveal = ({ 
@@ -18,14 +19,35 @@ const ScrollReveal = ({
   threshold = 0.1,
   delay = 0,
   direction = 'up',
-  duration = 800, // Default animation duration
-  once = true, // Default to only animate once for better performance
-  rootMargin = '0px 0px -100px 0px' // Default rootMargin
+  duration = 800,
+  once = true,
+  rootMargin = '0px 0px -100px 0px',
+  disabled = false
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
+    
+    const handleChange = () => setIsReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
   
   useEffect(() => {
+    // If animations are disabled or reduced motion preference, skip animation
+    if (disabled || isReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+    
     const currentRef = ref.current;
     if (!currentRef) return;
     
@@ -56,13 +78,18 @@ const ScrollReveal = ({
         observer.unobserve(currentRef);
       }
     };
-  }, [threshold, delay, isVisible, once, rootMargin]);
+  }, [threshold, delay, isVisible, once, rootMargin, disabled, isReducedMotion]);
   
   // Define animation classes based on direction
   let animationClass = 'reveal-up';
   if (direction === 'down') animationClass = 'reveal-down';
   if (direction === 'left') animationClass = 'reveal-left';
   if (direction === 'right') animationClass = 'reveal-right';
+  
+  // If disabled or reduced motion preference, don't apply animation classes
+  if (disabled || isReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
   
   return (
     <div

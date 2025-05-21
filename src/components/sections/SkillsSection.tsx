@@ -31,9 +31,12 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 
 const SkillsSection = () => {
   const isMobile = useIsMobile();
+  const [activeTab, setActiveTab] = useState("frontend");
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
   
   // Define skill categories
   const skillCategories = [
@@ -140,6 +143,21 @@ const SkillsSection = () => {
     }
   ];
 
+  // Handle mobile tab touches
+  const handleTabChange = (value: string) => {
+    if (isMobile) {
+      // On mobile, briefly show indicator that the tab changed
+      setShowMobileWarning(true);
+      setTimeout(() => setShowMobileWarning(false), 1500);
+    }
+    setActiveTab(value);
+  };
+
+  // Preselect frontend tab on mobile
+  useEffect(() => {
+    setActiveTab("frontend");
+  }, []);
+
   return (
     <section id="skills" className="py-16 bg-secondary/50">
       <div className="container px-4 mx-auto">
@@ -151,28 +169,40 @@ const SkillsSection = () => {
         </ScrollReveal>
         
         <ScrollReveal delay={400}>
-          <Tabs defaultValue="frontend" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-7 w-full mb-8">
-              {skillCategories.map((category) => (
-                <TabsTrigger key={category.id} value={category.id} className="text-sm">
-                  {category.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+          <Tabs defaultValue="frontend" value={activeTab} onValueChange={handleTabChange} className="w-full">
+            <div className="relative">
+              <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 w-full mb-8 overflow-x-auto scrollbar-none">
+                {skillCategories.map((category) => (
+                  <TabsTrigger 
+                    key={category.id} 
+                    value={category.id} 
+                    className="text-xs sm:text-sm whitespace-nowrap"
+                  >
+                    {category.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              
+              {showMobileWarning && isMobile && (
+                <div className="absolute top-12 left-0 right-0 bg-background/80 text-center py-2 text-xs text-primary animate-fade-in rounded-md backdrop-blur-sm">
+                  Switched to {skillCategories.find(c => c.id === activeTab)?.label} skills
+                </div>
+              )}
+            </div>
             
             {skillCategories.map((category) => (
               <TabsContent key={category.id} value={category.id}>
-                <Card className="p-6 bg-card/50 backdrop-blur-sm border border-border/50">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <Card className="p-4 sm:p-6 bg-card/50 backdrop-blur-sm border border-border/50">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                     {category.skills.map((skill, idx) => (
                       <div 
                         key={`${category.id}-${idx}`} 
-                        className="flex flex-col items-center p-4 rounded-xl bg-background/50 border border-primary/10 hover:border-primary/30 transition-all hover:shadow-md"
+                        className="flex flex-col items-center p-3 sm:p-4 rounded-lg bg-background/50 border border-primary/10 hover:border-primary/30 transition-all hover:shadow-md"
                       >
                         <div className="text-primary mb-2">
                           {skill.icon}
                         </div>
-                        <span className="text-sm font-medium text-center">
+                        <span className="text-xs sm:text-sm font-medium text-center">
                           {skill.name}
                         </span>
                       </div>
@@ -186,7 +216,7 @@ const SkillsSection = () => {
         
         <ScrollReveal delay={500}>
           <div className="w-full mt-12">
-            <div className="flex flex-wrap justify-center gap-3 text-xs md:text-sm text-muted-foreground max-w-3xl mx-auto text-center">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs md:text-sm text-muted-foreground max-w-3xl mx-auto text-center">
               <span className="px-3 py-1 rounded-full bg-primary/10">React</span>
               <span className="px-3 py-1 rounded-full bg-primary/10">TypeScript</span>
               <span className="px-3 py-1 rounded-full bg-primary/10">Next.js</span>
